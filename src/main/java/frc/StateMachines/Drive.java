@@ -1,27 +1,33 @@
 package frc.StateMachines;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Controls;
 import frc.robot.Robot;
 import frc.robot.Constants;
-import frc.Subsystems.*;
 
 public class Drive extends Base{
     
-    private double Throt = .5;
+    public static final int Driving = 0;
+    public static final int Seeking = 1;
+    public static final int AimandApproach = 2;
+    public static final int Stopped = 3;
+
+    public double left = 0;
+    public double right = 0;
+
+    public double KP = .1;
+    public double KPAIM = .1;
+    public double KPDISTANCE = .1;
+
+    public double MinAdd = .05;
+
+    public double Throt = .5;
+    public double SteeringAdjust = 0;
+    public double HeadingError = 0;
+    public double DistanceError = 0;
+    public double DistanceAdjust = 0;
 
     public void update() {
         switch(state) {
-            case Stop:
-                Robot.mecanum.Drive(0, 0, 0, 0, 0);
-                break;
-            case Input:
-                if (DriverStation.getInstance().isAutonomous()) { setState(Sandstorm);}
-                else { setState(Driving);}
-                break;
-            case Sandstorm:
-                break;
             case Driving:
                 if (Controls.increaseThrottle()){ // Right button increases throttle
                     Throt += 0.02;
@@ -35,7 +41,65 @@ public class Drive extends Base{
                 if (Throt <= 0) {
                     Throt = 0;
                 }
-                Robot.mecanum.Drive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.mecanum.getYaw(), Throt);
+                if (Robot.dLibrary.getDriveTrainType() == "Mecanum") {
+                    Robot.driveTrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.driveTrain.getYaw(), Throt);
+                }
+                else if (Robot.dLibrary.getDriveTrainType() == "Tank") {
+                    Robot.driveTrain.TankDrive(Controls.getY(), Controls.getX(), Throt);
+                }
+                if (Controls.activateVision()) {
+                    setState(Seeking);
+                }
+                break;
+            case Seeking:
+                if (Controls.activateVision()) {
+                    if (Robot.limeLightVision.getTarget() == 0) {
+                        SteeringAdjust = .3;
+                    }
+                    else {
+                        HeadingError = Robot.limeLightVision.getX();
+                        SteeringAdjust = KP * Robot.limeLightVision.getX();
+                    }
+                    left += SteeringAdjust;
+                    right -= SteeringAdjust;
+                    Robot.driveTrain.AutoDrive(left, right, Constants.AUTOSPEED);
+                    if (SteeringAdjust == 0) {
+                        setState(AimandApproach);
+                    }
+                }
+                else {
+                    setState(Driving);
+                }
+                break;
+            case AimandApproach:
+                if (Controls.activateVision()) {
+                    HeadingError = -Robot.limeLightVision.getX();
+                    DistanceError = -Robot.limeLightVision.getY();
+                    SteeringAdjust = 0;
+                if (Robot.limeLightVision.getX() > 1) {
+                    SteeringAdjust = KPAIM * HeadingError - MinAdd; 
+                }
+                else if (Robot.limeLightVision.getX() < 1) {
+                    SteeringAdjust = KPAIM * HeadingError + MinAdd;
+                }
+                DistanceError = Robot.limeLightVision.getY();
+                DistanceAdjust = KPDISTANCE * DistanceError;
+
+                left += SteeringAdjust + DistanceAdjust;
+                right -= SteeringAdjust + DistanceAdjust;
+
+                Robot.driveTrain.AutoDrive(left, right, Constants.AUTOSPEED);
+
+                if (Robot.driveTrain.getDistanceToWall() < Constants.DistanceToTape || Robot.driveTrain.getVoltage() < Constants.IRWallDistanceVoltage) {
+                    Robot.driveTrain.StopMotors();
+                }
+            }
+            else {
+                setState(Driving);
+            }
+                break;
+            case Stopped:
+                Robot.driveTrain.StopMotors();
                 break;
         }
     }

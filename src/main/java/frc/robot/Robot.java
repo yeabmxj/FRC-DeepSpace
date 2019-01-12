@@ -1,42 +1,29 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.Subsystems.Mecanum;
+import frc.Subsystems.LimeLightVision;
 import frc.StateMachines.Drive;
+import frc.Subsystems.DriveTrain;
+import frc.Subsystems.DLibrary;
 
 public class Robot extends TimedRobot {
 
-  public static Mecanum mecanum;
+  public static DriveTrain driveTrain;
+  public static LimeLightVision limeLightVision;
+  public static DLibrary dLibrary;
 
   public static Drive drive;
 
-  @Override
   public void robotInit() {
-    mecanum = new Mecanum(new TalonSRX(Constants.FrontLeftTalonID), new TalonSRX(Constants.FrontRightTalonID), new TalonSRX(Constants.BackLeftTalonID), new TalonSRX(Constants.BackRightTalonID));
-
+    driveTrain = new DriveTrain();
     drive = new Drive();
-  }
+    limeLightVision = new LimeLightVision();
 
-  @Override
-  public void robotPeriodic() {
+    dLibrary.setDriveTrainType("Mecanum");
   }
-
-  @Override
-  public void autonomousInit() {
+  public void teleopInit() {
+    driveTrain.resetGyro();
+    drive.setState(Drive.Driving);
   }
-
-  @Override
-  public void autonomousPeriodic() {
-  }
-
-  @Override
-  public void teleopPeriodic() {
-  }
-
-  @Override
-  public void testPeriodic() {
-  }
+  public void teleopPeriodic() {drive.update();}
 }

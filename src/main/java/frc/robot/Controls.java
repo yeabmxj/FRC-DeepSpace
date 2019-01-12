@@ -11,4 +11,5 @@ public class Controls{
 
     public static boolean increaseThrottle() { return joystick.getRawButton(Constants.IncreaseThrottleButton);}
     public static boolean decreaseThrottle() { return joystick.getRawButton(Constants.DecreaseThrottleButton);}
+    public static boolean activateVision() { return joystick.getRawButton(Constants.ActivateVision);}
 }
