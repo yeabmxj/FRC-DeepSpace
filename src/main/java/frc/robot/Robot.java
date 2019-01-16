@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.Subsystems.LimeLightVision;
+import frc.auto.CSVWrite;
 import frc.StateMachines.Drive;
 import frc.Subsystems.DriveTrain;
 import frc.Subsystems.DLibrary;
@@ -21,7 +22,21 @@ public class Robot extends TimedRobot {
 
     dLibrary.setDriveTrainType("Mecanum");
   }
+  public void autonomusInit() {
+    if (Controls.startReading()) {
+      drive.setState(Drive.SandStorm);
+    }
+    else {
+      drive.setState(Drive.Driving);
+    }
+  }
+  public void autonomusPeriodic() {
+    drive.update();
+  }
   public void teleopInit() {
+    if (Controls.startWriting()) {
+      CSVWrite.writeCSV("Auto Routine 1");;
+    }
     driveTrain.resetGyro();
     drive.setState(Drive.Driving);
   }

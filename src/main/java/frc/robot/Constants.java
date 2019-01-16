@@ -14,6 +14,8 @@ public class Constants{
     public static final int IncreaseThrottleButton = 5;
     public static final int DecreaseThrottleButton = 6;
     public static final int ActivateVision = 1;
+    public static final int StartReading = 2;
+    public static final int StartWriting = 3;
 
     public static final double DEADBAND = .02;
 
@@ -42,4 +44,14 @@ public class Constants{
 
     //Auto
     public static final double AUTOSPEED = .25;
+
+    //CSV
+    public static final String COMMA = ",";
+    public static final String NEWLINE = "\n";
+    public static final String FILEHEADER = "X,Y,Z,GyroAngle";
+
+    public static final int XVALUEINDEXID = 0;
+    public static final int YVALUEINDEXID = 1;
+    public static final int ZVALUEINDEXID = 2;
+    public static final int GYROANGLEVALUEINDEXID = 3;
 }

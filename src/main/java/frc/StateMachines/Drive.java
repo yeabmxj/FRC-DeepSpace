@@ -2,6 +2,8 @@ package frc.StateMachines;
 
 import frc.robot.Controls;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.auto.CSVRead;
 import frc.robot.Constants;
 
 public class Drive extends Base{
@@ -10,6 +12,7 @@ public class Drive extends Base{
     public static final int Seeking = 1;
     public static final int AimandApproach = 2;
     public static final int Stopped = 3;
+    public static final int SandStorm = 4;
 
     public double left = 0;
     public double right = 0;
@@ -100,6 +103,14 @@ public class Drive extends Base{
                 break;
             case Stopped:
                 Robot.driveTrain.StopMotors();
+                break;
+            case SandStorm:
+                if (DriverStation.getInstance().isAutonomous()) {
+                    Robot.driveTrain.MecanumDrive(CSVRead.AUTOY, CSVRead.AUTOX, CSVRead.AUTOZ, CSVRead.AUTOGYROANGLE, .5);
+                }
+                else {
+                    setState(Driving);
+                }
                 break;
         }
     }
