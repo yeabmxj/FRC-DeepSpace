@@ -53,6 +53,9 @@ public class Drive extends Base{
                 if (Controls.activateVision()) {
                     setState(Seeking);
                 }
+                if (DriverStation.getInstance().isAutonomous() && Controls.startReading()) {
+                    setState(SandStorm);
+                }
                 break;
             case Seeking:
                 if (Controls.activateVision()) {
@@ -105,8 +108,10 @@ public class Drive extends Base{
                 Robot.driveTrain.StopMotors();
                 break;
             case SandStorm:
-                if (DriverStation.getInstance().isAutonomous()) {
-                    Robot.driveTrain.MecanumDrive(CSVRead.AUTOY, CSVRead.AUTOX, CSVRead.AUTOZ, CSVRead.AUTOGYROANGLE, .5);
+                Robot.driveTrain.MecanumDrive(CSVRead.AUTOY, CSVRead.AUTOX, CSVRead.AUTOZ, CSVRead.AUTOGYROANGLE, .5);
+                
+                if (Controls.activateVision()) {
+                    setState(Seeking);
                 }
                 else {
                     setState(Driving);

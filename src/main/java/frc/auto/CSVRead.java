@@ -36,13 +36,11 @@ public class CSVRead{
             System.out.println("Error in CsvFileReader !!!");
             e.printStackTrace();
         }
-        finally {
-            try {
-                fileReader.close();
-            }
-            catch(IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            fileReader.close();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
         }
     }
 }
