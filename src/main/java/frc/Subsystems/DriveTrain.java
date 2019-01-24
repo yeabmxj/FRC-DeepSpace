@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SPI;
 
+import frc.Base.Constants;
 import frc.robot.*;
 
 public class DriveTrain {
@@ -23,7 +24,7 @@ public class DriveTrain {
 
     double[] processed;
 
-    double m_rightSideInvertMultiplier = -1;
+    double throttle = 0.5;
 
     public DriveTrain() {
         frontleftMotor = new TalonSRX(Constants.FrontLeftTalonID);
@@ -33,19 +34,11 @@ public class DriveTrain {
 
         distanceToWallSensor = new AnalogInput(Constants.DistanceToWallSensor);
         
-        if (Robot.dLibrary.getDriveTrainType() == "Mecanum") {
-            frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-            frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-            backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-            backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        }
-        else if (Robot.dLibrary.getDriveTrainType() == "Tank") {
-            frontleftMotor.set(ControlMode.Follower, Constants.BackLeftTalonID);
-            frontrightMotor.set(ControlMode.Follower, Constants.BackRightTalonID);
-
-            backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-            backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        }
+        frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        
         navx = new AHRS(SPI.Port.kMXP);
     }
     public void MecanumDrive(double yaxis, double xaxis, double zaxis, double gyroangle, double throttle) {
@@ -63,18 +56,11 @@ public class DriveTrain {
         Robot.dLibrary.normalize(wheelSpeeds);
 
         frontleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.FrontLeftTalonID]) * throttle);
-        frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FrontRightTalonID]) * throttle) * m_rightSideInvertMultiplier);
+        frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FrontRightTalonID]) * throttle) * -1);
         backleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.BackLeftTalonID]) * throttle);
-        backrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.BackRightTalonID]) * throttle) * m_rightSideInvertMultiplier);
+        backrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.BackRightTalonID]) * throttle) * -1);
     }
     public void TankDrive(double yaxis, double xaxis, double throttle) {
-        double leftspeed = (yaxis + xaxis) * throttle;
-        double rightspeed = (yaxis - xaxis) * throttle;
-
-        backleftMotor.set(ControlMode.PercentOutput, leftspeed);
-        backrightMotor.set(ControlMode.PercentOutput, rightspeed);
-    }
-    public void AutoDrive(double yaxis, double xaxis, double throttle) {
         double leftspeed = (yaxis + xaxis) * throttle;
         double rightspeed = (yaxis - xaxis) * throttle;
 
@@ -84,16 +70,25 @@ public class DriveTrain {
         backrightMotor.set(ControlMode.PercentOutput, rightspeed);
     }
     public void StopMotors() {
-        if (Robot.dLibrary.getDriveTrainType() == "Mecanum") {
+        if (Robot.dLibrary.getDriveTrainType().equals("Mecanum")) {
             MecanumDrive(0,0,0,0,0);
         }
-        if (Robot.dLibrary.getDriveTrainType() == "Tank") {
+        if (Robot.dLibrary.getDriveTrainType().equals("Tank")) {
             TankDrive(0,0,0);
         }
     }
-    public double getDistanceToWall() { 
-        double distanceToWall = (Constants.HIGHTTOTAPE - Constants.HIGHTTOCAMERA) / Math.tan(Constants.CAMERAANGLE + Robot.limeLightVision.getContourInfo("ts"));
-        return distanceToWall;
+    public double Throttle(double rawAxis3, double rawAxis2) {
+        throttle += .005 * (rawAxis3 - rawAxis2);
+        if (throttle > 1) {
+            throttle = Math.signum(throttle);
+        }
+        if (throttle < 0) {
+            throttle = 0;
+        }
+        return throttle;
+    }
+    public double getDistanceToWall() {
+        return (Constants.HIGHTTOTAPE - Constants.HIGHTTOCAMERA) / Math.tan(Constants.CAMERAANGLE + Robot.limeLightVision.getContourInfo("ts"));
     }
     public float getYaw() {
         return navx.getYaw();

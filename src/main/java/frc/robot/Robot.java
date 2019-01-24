@@ -1,45 +1,40 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.StateMachines.Arm;
+import frc.StateMachines.SandyDrive;
+import frc.Subsystems.ArmManipulator;
 import frc.Subsystems.LimeLightVision;
-import frc.auto.CSVWrite;
 import frc.StateMachines.Drive;
 import frc.Subsystems.DriveTrain;
-import frc.Subsystems.DLibrary;
+import frc.Base.DLibrary;
 
 public class Robot extends TimedRobot {
 
-  public static DriveTrain driveTrain;
-  public static LimeLightVision limeLightVision;
-  public static DLibrary dLibrary;
+    public static DriveTrain driveTrain;
+    public static LimeLightVision limeLightVision;
+    public static DLibrary dLibrary;
+    public static ArmManipulator armManipulator;
+    public static Arm arm;
 
-  public static Drive drive;
+    public static Drive drive;
+    public static SandyDrive sandyDrive;
 
-  public void robotInit() {
-    
-    driveTrain = new DriveTrain();
-    drive = new Drive();
-    limeLightVision = new LimeLightVision();
+    public void robotInit() {
 
-    dLibrary.setDriveTrainType("Mecanum");
-  }
-  public void autonomusInit() {
-    if (Controls.startReading()) {
-      drive.setState(Drive.SandStorm);
+        driveTrain = new DriveTrain();
+        drive = new Drive();
+        limeLightVision = new LimeLightVision();
+        dLibrary = new DLibrary();
+        armManipulator = new ArmManipulator();
+        arm = new Arm();
+
+        dLibrary.setDriveTrainType("Tank");
+        sandyDrive = new SandyDrive();
     }
-    else {
-      drive.setState(Drive.Driving);
+    public void teleopInit() {
+        driveTrain.resetGyro();
+        Robot.drive.setState(Robot.dLibrary.getDriveTrainType().equals("Mecanum") ? Drive.Mecanum : Drive.Tank);
     }
-  }
-  public void autonomusPeriodic() {
-    drive.update();
-  }
-  public void teleopInit() {
-    if (Controls.startWriting()) {
-      CSVWrite.writeCSV("Auto Routine 1");;
-    }
-    driveTrain.resetGyro();
-    drive.setState(Drive.Driving);
-  }
-  public void teleopPeriodic() {drive.update();}
+    public void teleopPeriodic() {drive.update();}
 }

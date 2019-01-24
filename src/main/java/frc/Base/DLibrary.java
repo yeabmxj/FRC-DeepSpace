@@ -1,13 +1,12 @@
-package frc.Subsystems;
+package frc.Base;
 
 import java.util.StringJoiner;
 
 import frc.robot.Robot;
-import frc.robot.Constants;
 
 public class DLibrary{
 
-    String DriveTrainType = "";
+    private String DriveTrainType = "";
     
     public void setDriveTrainType(String DriveType) {
         DriveTrainType = DriveType;
@@ -15,6 +14,7 @@ public class DLibrary{
     public String getDriveTrainType() {
         return DriveTrainType;
     }
+
     public double[] rotate(double x, double y, double gyroangle) {
         double cosA = Math.cos(gyroangle * (Math.PI / 180));
         double sinA = Math.sin(gyroangle * (Math.PI / 180));

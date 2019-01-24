@@ -1,8 +1,8 @@
-package frc.StateMachines;
+package frc.Base;
 
-public class Base {
+public class SwitchStateBase {
     public int state = 0;
-    public Base() {}
+    public SwitchStateBase() {}
     protected void updateChildren() {}
     public void update() {}
     public void setState(int s) { state = s;}
