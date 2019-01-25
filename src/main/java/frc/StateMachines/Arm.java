@@ -65,10 +65,10 @@ public class Arm {
                          getFSMState().equals("level 3") ? 3 :
                          getFSMState().equals("home") ? 0 : 5);
                 Robot.armManipulator.setSpeed(
+                        Robot.armManipulator.getLevelPressed(getSetLevel()) ? 0 :
                         Robot.armManipulator.getCurrentLevel() > getSetLevel() &&
-                        Robot.armManipulator.getCurrentLevel() != 5 ? .5 :
-                        Robot.armManipulator.getCurrentLevel() < getSetLevel() ? -.5 :
-                        Robot.armManipulator.getCurrentLevel() == getSetLevel() ? 0 :
+                        Robot.armManipulator.getCurrentLevel() != 5 ? -.5 :
+                        Robot.armManipulator.getCurrentLevel() < getSetLevel() ? .5 :
                         Robot.armManipulator.getCurrentLevel() == 5 ? 0:0);
                 setFSMState(Robot.armManipulator.getSpeed() == 0 ? "stopped" : "moving");
                 setSwitchState(getFSMState().equals("stopped") ? Input : CurrentlyMoving);
