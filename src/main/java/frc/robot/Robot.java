@@ -32,9 +32,16 @@ public class Robot extends TimedRobot {
         dLibrary.setDriveTrainType("Tank");
         sandyDrive = new SandyDrive();
     }
+    public void autonomousInit() {
+        sandyDrive.setState(SandyDrive.Seeking);
+    }
+    public void autonomousPeriodic() {
+        sandyDrive.update();
+    }
+
     public void teleopInit() {
         driveTrain.resetGyro();
-        Robot.drive.setState(Robot.dLibrary.getDriveTrainType().equals("Mecanum") ? Drive.Mecanum : Drive.Tank);
+        drive.setState(Drive.Input);
     }
     public void teleopPeriodic() {drive.update();}
 }

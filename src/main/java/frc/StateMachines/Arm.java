@@ -20,31 +20,60 @@ public class Arm {
     private int switchState = 0;
     private int level;
 
-    public void setSwitchState(int s) { switchState = s;}
-    public void setLevel(int l) { level = l;}
+    private String initialstate = "";
 
-    public static void setFSMState(String state) { currentState = state;}
-    public String getFSMState() { return currentState;}
-    public int getSetLevel() { return level;}
+    public void setSwitchState(int s) {
+        switchState = s;
+    }
+
+    public void setLevel(int l) {
+        level = l;
+    }
+
+    public static void setFSMState(String state) {
+        currentState = state;
+    }
+
+    public String getFSMState() {
+        return currentState;
+    }
+
+    public int getSetLevel() {
+        return level;
+    }
 
     public static final int Input = 0;
     public static final int CurrentlyMoving = 5;
     public static final int ManualMove = 6;
 
     public void update() {
-        switch(switchState) {
+        switch (switchState) {
             case Input:
                 setFSMState("home");
-                setLevel(Controls.setArmLevel1() ? 1 : Controls.setArmLevel2() ? 2 : Controls.setArmLevel3() ? 3: 0);
-                setSwitchState(CurrentlyMoving);
+                setFSMState(Controls.setArmLevel1() ? "level 1" :
+                            Controls.setArmLevel2() ? "level 2" :
+                            Controls.setArmLevel3() ? "level 3" :
+                            Controls.home() ? "home" : "input");
+                setSwitchState(getFSMState().equals("level 1") ||
+                               getFSMState().equals("level 2") ||
+                               getFSMState().equals("level 3") ||
+                               getFSMState().equals("home") ? CurrentlyMoving : Input);
                 break;
             case CurrentlyMoving:
-                setFSMState("moving");
-                Robot.armManipulator.setSpeed(Robot.armManipulator.getLevelPressed(getSetLevel()) ? 0 : .5);
-                setFSMState(Robot.armManipulator.getSpeed()  == 0 ? "stopped" : "moving");
-                setSwitchState(Input);
+                setLevel(getFSMState().equals("level 1") ? 1 :
+                         getFSMState().equals("level 2") ? 2 :
+                         getFSMState().equals("level 3") ? 3 :
+                         getFSMState().equals("home") ? 0 : 5);
+                Robot.armManipulator.setSpeed(
+                        Robot.armManipulator.getCurrentLevel() > getSetLevel() &&
+                        Robot.armManipulator.getCurrentLevel() != 5 ? .5 :
+                        Robot.armManipulator.getCurrentLevel() < getSetLevel() ? -.5 :
+                        Robot.armManipulator.getCurrentLevel() == getSetLevel() ? 0 :
+                        Robot.armManipulator.getCurrentLevel() == 5 ? 0:0);
+                setFSMState(Robot.armManipulator.getSpeed() == 0 ? "stopped" : "moving");
+                setSwitchState(getFSMState().equals("stopped") ? Input : CurrentlyMoving);
                 break;
+                }
         }
-    }
 
-}
+    }

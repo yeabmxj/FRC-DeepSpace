@@ -40,7 +40,7 @@ public class SandyDrive extends SwitchStateBase {
                     }
                     left += SteeringAdjust;
                     right -= SteeringAdjust;
-                    Robot.driveTrain.TankDrive(left, right, Controls.getThrottle());
+                    Robot.driveTrain.TankDrive(left, right, .5);
                     if (SteeringAdjust == 0) {
                         setState(AimandApproach);
                     }
@@ -66,7 +66,7 @@ public class SandyDrive extends SwitchStateBase {
                     left += SteeringAdjust + DistanceAdjust;
                     right -= SteeringAdjust + DistanceAdjust;
 
-                    Robot.driveTrain.TankDrive(left, right, Controls.getThrottle());
+                    Robot.driveTrain.TankDrive(left, right, .5);
 
                     if (Robot.driveTrain.getDistanceToWall() < Constants.DistanceToTape || Robot.driveTrain.getVoltage() < Constants.IRWallDistanceVoltage) {
                         Robot.driveTrain.StopMotors();

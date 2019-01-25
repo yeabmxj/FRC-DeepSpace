@@ -15,7 +15,7 @@ public class ArmManipulator {
     DigitalInput level2;
     DigitalInput level3;
 
-    PID armMan;
+    double level;
 
     public ArmManipulator() {
         arm = new TalonSRX(Constants.ArmTalonID);
@@ -32,6 +32,24 @@ public class ArmManipulator {
     }
     public boolean getLevelPressed(int level) {
         return (level == 0 ? home : level == 1 ? level1 : level == 2 ? level2 : level == 3 ? level3 : null).get();
+    }
+    public double getCurrentLevel() {
+        if (home.get()) {
+            level = 0;
+        }
+        else if (level1.get()) {
+            level = 1;
+        }
+        else if (level2.get()) {
+            level = 2;
+        }
+        else if (level3.get()) {
+            level = 3;
+        }
+        else {
+            level = 5;
+        }
+        return level;
     }
     public void setSpeed(double output) {
         arm.set(ControlMode.Position, output);

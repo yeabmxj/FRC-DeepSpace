@@ -37,7 +37,7 @@ public class Controls{
     }
 
     public static boolean[] getJoyButtons() {
-        if (joystick.getName().equals("")) {
+        if (joystick.getName().equals("Logitech RumblePad 2 USB")) {
             Activatevision = joystick.getRawButton(Constants.ActivateVisionT);
             CSVreading = joystick.getRawButton(Constants.StartReadingT);
             CSVwriting = joystick.getRawButton(Constants.StartWritingT);
