@@ -8,10 +8,6 @@ public class Arm {
 
     /* List of states
      * Input
-     * Home
-     * Level 1
-     * Level 2
-     * Level 3
      * Currently Moving
      * Manual Move
      */
@@ -20,27 +16,11 @@ public class Arm {
     private int switchState = 0;
     private int level;
 
-    private String initialstate = "";
-
-    public void setSwitchState(int s) {
-        switchState = s;
-    }
-
-    public void setLevel(int l) {
-        level = l;
-    }
-
-    public static void setFSMState(String state) {
-        currentState = state;
-    }
-
-    public String getFSMState() {
-        return currentState;
-    }
-
-    public int getSetLevel() {
-        return level;
-    }
+    public void setSwitchState(int s) { switchState = s;}
+    public void setLevel(int l) { level = l;}
+    public static void setFSMState(String state) { currentState = state;}
+    public String getFSMState() { return currentState;}
+    public int getSetLevel() { return level; }
 
     public static final int Input = 0;
     public static final int CurrentlyMoving = 5;
@@ -65,10 +45,10 @@ public class Arm {
                          getFSMState().equals("level 3") ? 3 :
                          getFSMState().equals("home") ? 0 : 5);
                 Robot.armManipulator.setSpeed(
-                        Robot.armManipulator.getLevelPressed(getSetLevel()) ? 0 :
-                        Robot.armManipulator.getCurrentLevel() > getSetLevel() &&
+                        Robot.armManipulator.getLevelPressed(Robot.arm.getSetLevel()) ? 0 :
+                        Robot.armManipulator.getCurrentLevel() > Robot.arm.getSetLevel() &&
                         Robot.armManipulator.getCurrentLevel() != 5 ? -.5 :
-                        Robot.armManipulator.getCurrentLevel() < getSetLevel() ? .5 :
+                        Robot.armManipulator.getCurrentLevel() < Robot.arm.getSetLevel() ? .5 :
                         Robot.armManipulator.getCurrentLevel() == 5 ? 0:0);
                 setFSMState(Robot.armManipulator.getSpeed() == 0 ? "stopped" : "moving");
                 setSwitchState(getFSMState().equals("stopped") ? Input : CurrentlyMoving);

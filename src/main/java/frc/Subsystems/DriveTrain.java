@@ -22,9 +22,7 @@ public class DriveTrain {
 
     public AHRS navx;
 
-    double[] processed;
-
-    double throttle = 0.5;
+    private double throttle = 0.5;
 
     public DriveTrain() {
         frontleftMotor = new TalonSRX(Constants.FrontLeftTalonID);
@@ -45,7 +43,7 @@ public class DriveTrain {
         yaxis = Robot.dLibrary.applyDeadband(Robot.dLibrary.limit(yaxis));
         xaxis = Robot.dLibrary.applyDeadband(Robot.dLibrary.limit(xaxis));
 
-        processed = Robot.dLibrary.rotate(xaxis, yaxis, gyroangle);
+        double[] processed = Robot.dLibrary.rotate(xaxis, yaxis, gyroangle);
 
         double[] wheelSpeeds = new double[5];
         wheelSpeeds[Constants.FrontLeftTalonID] = processed[0] + processed[1] + zaxis;
@@ -98,6 +96,17 @@ public class DriveTrain {
     }
     public double getVoltage() {
         return distanceToWallSensor.getVoltage();
+    }
+    public double getEncodervalues() {
+        double backleftDist = backleftMotor.getSelectedSensorPosition(0);
+        double backrightDist = backrightMotor.getSelectedSensorPosition(0);
+        double frontleftDist = frontleftMotor.getSelectedSensorPosition(0);
+        double frontrightDist = frontrightMotor.getSelectedSensorPosition(0);
+
+        double frontAverage = (frontleftDist + frontrightDist) / 2;
+        double backAverage = (backleftDist + backrightDist) / 2;
+
+        return (frontAverage + backAverage) / 1440 * 6 * Math.PI / 12;
     }
     public void resetEncoders() {
         frontleftMotor.setSelectedSensorPosition(0,0,0);

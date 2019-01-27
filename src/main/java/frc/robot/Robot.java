@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.Base.Controls;
 import frc.StateMachines.Arm;
 import frc.StateMachines.SandyDrive;
 import frc.Subsystems.ArmManipulator;
@@ -21,7 +22,6 @@ public class Robot extends TimedRobot {
     public static SandyDrive sandyDrive;
 
     public void robotInit() {
-
         driveTrain = new DriveTrain();
         drive = new Drive();
         limeLightVision = new LimeLightVision();
@@ -31,6 +31,17 @@ public class Robot extends TimedRobot {
 
         dLibrary.setDriveTrainType("Tank");
         sandyDrive = new SandyDrive();
+
+        driveTrain.resetEncoders();
+
+        Controls.init();
+        Controls.Driver = "Eyosias";
+        Controls.SubDriver = "Eyosias";
+
+        Controls.setTState(Controls.Input);
+    }
+    public void robotPeriodic() {
+        Controls.updateDriver();
     }
     public void autonomousInit() {
         sandyDrive.setState(SandyDrive.Seeking);
@@ -43,5 +54,11 @@ public class Robot extends TimedRobot {
         driveTrain.resetGyro();
         drive.setState(Drive.Input);
     }
-    public void teleopPeriodic() {drive.update();}
+    public void teleopPeriodic() {
+        if (Controls.activateVision()) {
+            limeLightVision.setCameraControls("camMode", 0);
+            sandyDrive.setState(SandyDrive.Seeking);
+        }
+        else { drive.update();}
+    }
 }

@@ -6,6 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.Base.Constants;
 import frc.Base.PID;
+import frc.StateMachines.Arm;
+import frc.robot.Robot;
+
+import static frc.StateMachines.Arm.setFSMState;
 
 public class ArmManipulator {
     TalonSRX arm;
@@ -34,22 +38,7 @@ public class ArmManipulator {
         return (level == 0 ? home : level == 1 ? level1 : level == 2 ? level2 : level == 3 ? level3 : null).get();
     }
     public double getCurrentLevel() {
-        if (home.get()) {
-            level = 0;
-        }
-        else if (level1.get()) {
-            level = 1;
-        }
-        else if (level2.get()) {
-            level = 2;
-        }
-        else if (level3.get()) {
-            level = 3;
-        }
-        else {
-            level = 5;
-        }
-        return level;
+        return level = (home.get() ? 0 : level1.get() ? 1 : level2.get() ? 2 : level3.get() ? 3 : 5);
     }
     public void setSpeed(double output) {
         arm.set(ControlMode.Position, output);
