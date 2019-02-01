@@ -1,27 +1,33 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.Base.Controls;
-import frc.StateMachines.Arm;
-import frc.StateMachines.SandyDrive;
-import frc.Subsystems.ArmManipulator;
-import frc.Subsystems.LimeLightVision;
-import frc.StateMachines.Drive;
-import frc.Subsystems.DriveTrain;
+import frc.StateMachines.*;
+import frc.Subsystems.*;
 import frc.Base.DLibrary;
 
 public class Robot extends TimedRobot {
 
+    public static ShuffleboardTab tab = Shuffleboard.getTab("drive");
+
     public static DriveTrain driveTrain;
     public static LimeLightVision limeLightVision;
-    public static DLibrary dLibrary;
     public static ArmManipulator armManipulator;
-    public static Arm arm;
+    public static Climber climber;
+    public static Vacuum vaccum;
+
+    public static DLibrary dLibrary;
 
     public static Drive drive;
-    public static SandyDrive sandyDrive;
+    public static Auto auto;
+    public static Arm arm;
+    public static Climb climb;
+    public static Succ succ;
 
     public void robotInit() {
+
         driveTrain = new DriveTrain();
         drive = new Drive();
         limeLightVision = new LimeLightVision();
@@ -30,13 +36,15 @@ public class Robot extends TimedRobot {
         arm = new Arm();
 
         dLibrary.setDriveTrainType("Tank");
-        sandyDrive = new SandyDrive();
+        auto = new Auto();
+
+        climber = new Climber();
+        vaccum = new Vacuum();
+
+        climb = new Climb();
+        succ = new Succ();
 
         driveTrain.resetEncoders();
-
-        Controls.init();
-        Controls.Driver = "Eyosias";
-        Controls.SubDriver = "Eyosias";
 
         Controls.setTState(Controls.Input);
     }
@@ -44,10 +52,10 @@ public class Robot extends TimedRobot {
         Controls.updateDriver();
     }
     public void autonomousInit() {
-        sandyDrive.setState(SandyDrive.Seeking);
+        auto.setState(Auto.ReachLine);
     }
     public void autonomousPeriodic() {
-        sandyDrive.update();
+        auto.update();
     }
 
     public void teleopInit() {
@@ -55,9 +63,9 @@ public class Robot extends TimedRobot {
         drive.setState(Drive.Input);
     }
     public void teleopPeriodic() {
-        if (Controls.activateVision()) {
+        if (Controls.Vision()) {
             limeLightVision.setCameraControls("camMode", 0);
-            sandyDrive.setState(SandyDrive.Seeking);
+            auto.setState(Auto.ReachLine);
         }
         else { drive.update();}
     }
