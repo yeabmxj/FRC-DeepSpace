@@ -14,8 +14,6 @@ public class Controls{
     public static Joystick driveJoy = new Joystick(0);
     private static Joystick systemJoy = new Joystick(1);
 
-    private static double throt = .5;
-
     static String driver;
     static String subdriver;
 
