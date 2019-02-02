@@ -19,7 +19,10 @@ public class ArmManipulator {
     DigitalInput level2;
     DigitalInput level3;
 
-    double level;
+    private int level;
+
+    public void setLevel(int l) { level = l;}
+    public int getSetLevel() { return level; }
 
     public ArmManipulator() {
         arm = new TalonSRX(Constants.ArmTalonID);

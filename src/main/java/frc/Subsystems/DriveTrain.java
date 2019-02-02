@@ -22,8 +22,6 @@ public class DriveTrain {
 
     public AHRS navx;
 
-    private double throttle = 0.5;
-
     public DriveTrain() {
         frontleftMotor = new TalonSRX(Constants.FrontLeftTalonID);
         frontrightMotor = new TalonSRX(Constants.FrontRightTalonID);
@@ -66,24 +64,6 @@ public class DriveTrain {
         backleftMotor.set(ControlMode.PercentOutput, leftspeed);
         frontrightMotor.set(ControlMode.PercentOutput, rightspeed);
         backrightMotor.set(ControlMode.PercentOutput, rightspeed);
-    }
-    public void StopMotors() {
-        if (Robot.dLibrary.getDriveTrainType().equals("Mecanum")) {
-            MecanumDrive(0,0,0,0,0);
-        }
-        if (Robot.dLibrary.getDriveTrainType().equals("Tank")) {
-            TankDrive(0,0,0);
-        }
-    }
-    public double Throttle(double rawAxis3, double rawAxis2) {
-        throttle += .005 * (rawAxis3 - rawAxis2);
-        if (throttle > 1) {
-            throttle = Math.signum(throttle);
-        }
-        if (throttle < 0) {
-            throttle = 0;
-        }
-        return throttle;
     }
     public double getDistanceToWall() {
         return (Constants.HIGHTTOTAPE - Constants.HIGHTTOCAMERA) / Math.tan(Constants.CAMERAANGLE + Robot.limeLightVision.getContourInfo("ts"));

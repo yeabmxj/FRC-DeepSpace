@@ -15,7 +15,7 @@ public class Climber {
         climbUp = new TalonSRX(climbUptalonid);
         climbForward = new TalonSRX(climbForwardtalonid);
     }
-    public void Climb(double rise, double reach) {
+    public void climb(double rise, double reach) {
         climbUp.set(ControlMode.Position, rise);
         climbForward.set(ControlMode.Position, reach);
     }

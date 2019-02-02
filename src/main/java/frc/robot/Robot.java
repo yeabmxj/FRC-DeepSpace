@@ -1,16 +1,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.Base.Controls;
+import frc.Base.Operator;
 import frc.StateMachines.*;
 import frc.Subsystems.*;
 import frc.Base.DLibrary;
 
 public class Robot extends TimedRobot {
 
-    public static ShuffleboardTab tab = Shuffleboard.getTab("drive");
+    public static DLibrary dLibrary;
 
     public static DriveTrain driveTrain;
     public static LimeLightVision limeLightVision;
@@ -18,39 +17,33 @@ public class Robot extends TimedRobot {
     public static Climber climber;
     public static Vacuum vaccum;
 
-    public static DLibrary dLibrary;
-
     public static Drive drive;
     public static Auto auto;
     public static Arm arm;
     public static Climb climb;
-    public static Succ succ;
+    public static Suction suction;
 
     public void robotInit() {
 
-        driveTrain = new DriveTrain();
-        drive = new Drive();
-        limeLightVision = new LimeLightVision();
         dLibrary = new DLibrary();
+
+        driveTrain = new DriveTrain();
+        limeLightVision = new LimeLightVision();
         armManipulator = new ArmManipulator();
-        arm = new Arm();
-
-        dLibrary.setDriveTrainType("Tank");
-        auto = new Auto();
-
         climber = new Climber();
         vaccum = new Vacuum();
 
+        drive = new Drive();
+        arm = new Arm();
+        auto = new Auto();
         climb = new Climb();
-        succ = new Succ();
+        suction = new Suction();
 
+        dLibrary.setDriveTrainType("Tank");
         driveTrain.resetEncoders();
-
-        Controls.setTState(Controls.Input);
+        Operator.update();
     }
-    public void robotPeriodic() {
-        Controls.updateDriver();
-    }
+    public void robotPeriodic() {}
     public void autonomousInit() {
         auto.setState(Auto.ReachLine);
     }

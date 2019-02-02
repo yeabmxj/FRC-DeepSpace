@@ -72,7 +72,7 @@ public class CSV {
             fileWriter.append(Constants.COMMA);
             fileWriter.append((char)Robot.driveTrain.getYaw());
             fileWriter.append(Constants.COMMA);
-            fileWriter.append((char)Robot.driveTrain.Throttle(Controls.driveJoy.getRawAxis(3), Controls.driveJoy.getRawAxis(2)));
+            fileWriter.append((char)Controls.getT());
             fileWriter.append(Constants.NEWLINE);
         }
         catch(Exception e) {

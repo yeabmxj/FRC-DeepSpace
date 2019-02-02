@@ -1,20 +1,14 @@
 package frc.StateMachines;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import frc.Base.SwitchStateBase;
 import frc.Base.Controls;
+import frc.Base.State;
 import frc.robot.Robot;
 
-public class Drive {
+public class Drive extends State {
 
     public static final int Input = 0;
-    public static final int Mecanum = 1;
-    public static final int Tank = 2;
-
-    double throttle = .5;
-
-    public int state = 0;
-    public void setState(int s) { state = s;}
+    private static final int Mecanum = 1;
+    private static final int Tank = 2;
 
     public void update() {
         switch(state) {
@@ -22,20 +16,11 @@ public class Drive {
                 setState(Robot.dLibrary.getDriveTrainType().equals("Mecanum") ? Mecanum : Tank);
                 break;
             case Mecanum:
-                if (Controls.increaseThrottle()) { throttle += .02;}
-                if (Controls.decreaseThrottle()) { throttle -= .02;}
-                if (throttle > 1) { throttle = 1;}
-                if (throttle < 0) { throttle = 0;}
-                Robot.driveTrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.driveTrain.getYaw(), throttle);
+                Robot.driveTrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.driveTrain.getYaw(), Controls.getT());
                 break;
             case Tank:
-                if (Controls.increaseThrottle()) { throttle += .02;}
-                if (Controls.decreaseThrottle()) { throttle -= .02;}
-                if (throttle > 1) { throttle = 1;}
-                if (throttle < 0) { throttle = 0;}
-                Robot.driveTrain.TankDrive(Controls.getY(), Controls.getX(), throttle);
+                Robot.driveTrain.TankDrive(Controls.getY(), Controls.getX(), Controls.getT());
                 break;
         }
     }
-
 }

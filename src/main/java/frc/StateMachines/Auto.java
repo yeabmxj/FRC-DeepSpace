@@ -1,11 +1,11 @@
 package frc.StateMachines;
 
 import frc.Base.Constants;
-import frc.Base.SwitchStateBase;
+import frc.Base.State;
 import frc.Base.PID;
 import frc.robot.Robot;
 
-public class Auto extends SwitchStateBase {
+public class Auto extends State {
     public static final int ReachLine = 0;
     public static final int Spin = 1;
     public static final int SpinAlign = 2;
@@ -60,7 +60,7 @@ public class Auto extends SwitchStateBase {
                     }
                 }
                 break;
-            case GetinRange:
+            case GetinRange:updateControllers
                 Robot.driveTrain.resetEncoders();
                 PID.getPID(Constants.IRWallDistanceVoltage, Robot.driveTrain.distanceToWallSensor.getVoltage());
                 Robot.driveTrain.TankDrive(PID.error,0,.5);

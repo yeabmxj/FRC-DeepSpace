@@ -11,7 +11,7 @@ public class Vacuum {
 
     int servochannel = 7;
     int pumpchannel = 7;
-    double groundangle;
+    double groundangle = 10;
 
     public Vacuum() {
         armHead = new Servo(servochannel);
@@ -20,11 +20,10 @@ public class Vacuum {
     public void succ(double succspeed) {
         pump.set(succspeed);
     }
-    public void setAngle(double tiltswitch) {
-        double angle = tiltswitch / 360;
+    public void setAngle(double angle) {
         armHead.set(angle);
     }
-    public void faceround() {
+    public void faceground() {
         armHead.set(groundangle);
     }
 }
