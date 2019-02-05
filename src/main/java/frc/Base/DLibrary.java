@@ -52,11 +52,11 @@ public class DLibrary{
           return value;
     }
     public double applyDeadband(double value) {
-        if (Math.abs(value) > Constants.DEADBAND) {
+        if (Math.abs(value) > Constants.DEAD_BAND) {
           if (value > 0.0) {
-            return (value - Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
+            return (value - Constants.DEAD_BAND) / (1.0 - Constants.DEAD_BAND);
           } else {
-            return (value + Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
+            return (value + Constants.DEAD_BAND) / (1.0 - Constants.DEAD_BAND);
           }
         } else {
           return 0.0;

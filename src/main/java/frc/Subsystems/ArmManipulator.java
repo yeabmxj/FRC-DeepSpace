@@ -5,14 +5,10 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.Base.Constants;
-import frc.Base.PID;
-import frc.StateMachines.Arm;
 import frc.robot.Robot;
 
-import static frc.StateMachines.Arm.setFSMState;
-
 public class ArmManipulator {
-    TalonSRX arm;
+    TalonSRX armManipulator;
 
     DigitalInput home;
     DigitalInput level1;
@@ -25,17 +21,17 @@ public class ArmManipulator {
     public int getSetLevel() { return level; }
 
     public ArmManipulator() {
-        arm = new TalonSRX(Constants.ArmTalonID);
+        armManipulator = new TalonSRX(Constants.ARM_TALON_ID);
 
-        arm.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 5);
+        armManipulator.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 5);
 
-        home = new DigitalInput(Constants.HomeLimitSwitchID);
-        level1 = new DigitalInput(Constants.Level1LimitSwitchID);
-        level2 = new DigitalInput(Constants.Level2LimitSwitchID);
-        level3 = new DigitalInput(Constants.Level3LimitSwitchID);
+        home = new DigitalInput(Constants.HOME_LIMIT_SWITCH_ID);
+        level1 = new DigitalInput(Constants.LEVEL_1_LIMIT_SWITCH_ID);
+        level2 = new DigitalInput(Constants.LEVEL_2_LIMIT_SWITCH_ID);
+        level3 = new DigitalInput(Constants.LEVEL_3_LIMIT_SWITCH_ID);
     }
     public double getHeight() {
-        return arm.getSelectedSensorPosition(0);
+        return armManipulator.getSelectedSensorPosition(0);
     }
     public boolean getLevelPressed(int level) {
         return (level == 0 ? home : level == 1 ? level1 : level == 2 ? level2 : level == 3 ? level3 : null).get();
@@ -44,9 +40,25 @@ public class ArmManipulator {
         return level = (home.get() ? 0 : level1.get() ? 1 : level2.get() ? 2 : level3.get() ? 3 : 5);
     }
     public void setSpeed(double output) {
-        arm.set(ControlMode.Position, output);
+        armManipulator.set(ControlMode.Position, output);
     }
     public double getSpeed() {
-        return arm.getMotorOutputPercent() / 100;
+        return armManipulator.getMotorOutputPercent() / 100;
+    }
+
+    public void updateLevel() {
+        setLevel(
+            Robot.arm.getFSMState().equals("level 1") ? 1 :
+            Robot.arm.getFSMState().equals("level 2") ? 2 :
+            Robot.arm.getFSMState().equals("level 3") ? 3 :
+            Robot.arm.getFSMState().equals("home") ? 0 : 5);
+    }
+    public void updateSpeed() {
+        setSpeed(
+            getLevelPressed(getSetLevel()) ? 0 :
+            getCurrentLevel() > getSetLevel() &&
+            getCurrentLevel() != 5 ? -.5 :
+            getCurrentLevel() < getSetLevel() ? .5 :
+            getCurrentLevel() == 5 ? 0:0);
     }
 }

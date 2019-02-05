@@ -1,10 +1,17 @@
 package frc.Base;
-
 public class Operator {
+    /*
+    Controller (Gamepad F310)
+    T.16000M
+    Controller (Xbox One For Windows)
+    Logitech Extreme 3D
+    Logitech RumblePad 2 USB
+     */
+    private static String driver = "";
+    private static String subdriver = "";
     private static String ThrottleType = "";
     private static void setThrottleType(String type) {ThrottleType = type;}
     public static String getThrottleType() { return ThrottleType;}
-
     private static void setAxis(int x, int y, int z) {
         Controls.xAxis = x;
         Controls.yAxis = y;
@@ -29,71 +36,85 @@ public class Operator {
         Controls.level2Button = l2;
         Controls.level3Button = l3;
     }
-    private static void setVaccumControls(int succ) {
-        Controls.succBTN = succ;
+    private static void setVaccumControls(int succ) { Controls.succBTN = succ; }
+    private static void setClimberControls(int climb) { Controls.climbBTN = climb; }
+    private static void setLimeLightControls(int vision) { Controls.visionButton = vision; }
+
+    public static String getDriver() {
+        return driver =
+                Controls.driveJoy.getName().equals("Controller (Xbox One For Windows)") ? "Eyosias" :
+                Controls.driveJoy.getName().equals("a") ? "Alex" :
+                Controls.driveJoy.getName().equals("j") ? "Jacob" :
+                Controls.driveJoy.getName().equals("z") ? "Zach" :
+                Controls.driveJoy.getName().equals("n") ? "Noah" : "Default";
     }
-    private static void setClimberControls(int climb) {
-        Controls.climbBTN = climb;
-    }
-    private static void setLimeLightControls(int vision) {
-        Controls.visionButton = vision;
+    public static String getSubDriver() {
+        return subdriver =
+                Controls.systemJoy.getName().equals("e") ? "Eyosias" :
+                Controls.systemJoy.getName().equals("a") ? "Alex" :
+                Controls.systemJoy.getName().equals("j") ? "Jacob" :
+                Controls.systemJoy.getName().equals("z") ? "Zach" :
+                Controls.systemJoy.getName().equals("n") ? "Noah" : "Default";
     }
     private static void updateDriveController() {
-        switch(Controls.driveJoy.getName()) {
-            case "e":
+        switch(getDriver()) {
+            case "Eyosias":
+                setAxis(1,4,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+            case "Alex":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
-            case "a":
+            case "Jacob":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
-            case "j":
+            case "Zach":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
-            case "z":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "n":
+            case "Noah":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
         }
     }
     private static void updateSubDriveController() {
-        switch(Controls.systemJoy.getName()) {
-            case "e":
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "a":
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "j":
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "z":
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "n":
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
+        switch(getSubDriver()) {
+            case "Eyosias":
+                setAxis(1,4,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+            case "Alex":
+                setAxis(1,2,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+            case "Jacob":
+                setAxis(1,2,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+            case "Zach":
+                setAxis(1,2,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+            case "Noah":
+                setAxis(1,2,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
         }
     }
-    public static void updateNoDriver() {
-        switch (Controls.systemJoy.getName()) {
-            case "e":
+    private static void updateNoDriver() {
+        switch (getSubDriver()) {
+            case "Eyosias":
+                setAxis(1,4,3);
+                setThrottleType("");
+                setThrottleControls(1,2,0,0,0);
+                setArmControls(1,2,3,4);
+                setVaccumControls(1);
+                setClimberControls(1);
+                setLimeLightControls(1);
+            case "Alex":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -101,7 +122,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "a":
+            case "Jacob":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -109,7 +130,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "j":
+            case "Zach":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -117,15 +138,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "z":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "n":
+            case "Noah":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -135,9 +148,17 @@ public class Operator {
                 setLimeLightControls(1);
         }
     }
-    public static void updateNoSubDriver() {
-        switch (Controls.driveJoy.getName()) {
-            case "e":
+    private static void updateNoSubDriver() {
+        switch (getDriver()) {
+            case "Eyosias":
+                setAxis(1,4,3);
+                setThrottleType("ButtonBased");
+                setThrottleControls(1,2,0,0,0);
+                setArmControls(3,4,5,6);
+                setVaccumControls(7);
+                setClimberControls(8);
+                setLimeLightControls(9);
+            case "Alex":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -145,7 +166,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "a":
+            case "Jacob":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -153,7 +174,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "j":
+            case "Zach":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -161,15 +182,7 @@ public class Operator {
                 setVaccumControls(1);
                 setClimberControls(1);
                 setLimeLightControls(1);
-            case "z":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "n":
+            case "Noah":
                 setAxis(1,2,3);
                 setThrottleType("");
                 setThrottleControls(1,2,0,0,0);
@@ -179,7 +192,7 @@ public class Operator {
                 setLimeLightControls(1);
         }
     }
-    public static void updateControllers() {
+    private static void updateControllers() {
         updateDriveController();
         updateSubDriveController();
     }

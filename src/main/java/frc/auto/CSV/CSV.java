@@ -31,11 +31,11 @@ public class CSV {
             while((line = fileReader.readLine()) != null) {
                 String[] tokens = line.split(Constants.COMMA);
                 if (tokens.length > 0) {
-                    AUTOX = (double)(Long.parseLong(tokens[Constants.XVALUEINDEXID]));
-                    AUTOY = (double)Long.parseLong(tokens[Constants.YVALUEINDEXID]);
-                    AUTOZ = (double)Long.parseLong(tokens[Constants.ZVALUEINDEXID]);
-                    AUTOGYROANGLE = (double)Long.parseLong(tokens[Constants.GYROANGLEVALUEINDEXID]);
-                    AUTOTHROTTLE = (double)Long.parseLong(tokens[Constants.THROTTLEVALUEINDEXID]);
+                    AUTOX = (double)(Long.parseLong(tokens[Constants.X_VALUE_INDEX_ID]));
+                    AUTOY = (double)Long.parseLong(tokens[Constants.Y_VALUE_INDEX_ID]);
+                    AUTOZ = (double)Long.parseLong(tokens[Constants.Z_VALUE_INDEX_ID]);
+                    AUTOGYROANGLE = (double)Long.parseLong(tokens[Constants.GYRO_ANGLE_VALUE_INDEX_ID]);
+                    AUTOTHROTTLE = (double)Long.parseLong(tokens[Constants.THROTTLE_VALUE_INDEX_ID]);
                 }
             }
         }
@@ -60,7 +60,7 @@ public class CSV {
             count++;
 
             if (count < 2) {
-                fileWriter.append(Constants.FILEHEADER);
+                fileWriter.append(Constants.FILE_HEADER);
                 fileWriter.append(Constants.NEWLINE);
             }
 

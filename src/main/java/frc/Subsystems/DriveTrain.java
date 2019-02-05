@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.Base.Constants;
+import frc.Base.Controls;
+import frc.StateMachines.Drive;
 import frc.robot.*;
 
 public class DriveTrain {
@@ -23,12 +25,12 @@ public class DriveTrain {
     public AHRS navx;
 
     public DriveTrain() {
-        frontleftMotor = new TalonSRX(Constants.FrontLeftTalonID);
-        frontrightMotor = new TalonSRX(Constants.FrontRightTalonID);
-        backleftMotor = new TalonSRX(Constants.BackLeftTalonID);
-        backrightMotor = new TalonSRX(Constants.BackRightTalonID);
+        frontleftMotor = new TalonSRX(Constants.FRONT_LEFT_TALON_ID);
+        frontrightMotor = new TalonSRX(Constants.FRONT_RIGHT_TALON_ID);
+        backleftMotor = new TalonSRX(Constants.BACK_LEFT_TALON_ID);
+        backrightMotor = new TalonSRX(Constants.BACK_RIGHT_TALON_ID);
 
-        distanceToWallSensor = new AnalogInput(Constants.DistanceToWallSensor);
+        distanceToWallSensor = new AnalogInput(Constants.DISTANCE_TO_WALL_SENSOR);
         
         frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
@@ -44,17 +46,17 @@ public class DriveTrain {
         double[] processed = Robot.dLibrary.rotate(xaxis, yaxis, gyroangle);
 
         double[] wheelSpeeds = new double[5];
-        wheelSpeeds[Constants.FrontLeftTalonID] = processed[0] + processed[1] + zaxis;
-        wheelSpeeds[Constants.FrontRightTalonID] = processed[0] - processed[1] + zaxis;
-        wheelSpeeds[Constants.BackLeftTalonID] = processed[0] + processed[1] + zaxis;
-        wheelSpeeds[Constants.BackRightTalonID] = processed[0] + processed[1] - zaxis;
+        wheelSpeeds[Constants.FRONT_LEFT_TALON_ID] = processed[0] + processed[1] + zaxis;
+        wheelSpeeds[Constants.FRONT_RIGHT_TALON_ID] = processed[0] - processed[1] + zaxis;
+        wheelSpeeds[Constants.BACK_LEFT_TALON_ID] = processed[0] + processed[1] + zaxis;
+        wheelSpeeds[Constants.BACK_RIGHT_TALON_ID] = processed[0] + processed[1] - zaxis;
 
         Robot.dLibrary.normalize(wheelSpeeds);
 
-        frontleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.FrontLeftTalonID]) * throttle);
-        frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FrontRightTalonID]) * throttle) * -1);
-        backleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.BackLeftTalonID]) * throttle);
-        backrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.BackRightTalonID]) * throttle) * -1);
+        frontleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.FRONT_LEFT_TALON_ID]) * throttle);
+        frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FRONT_RIGHT_TALON_ID]) * throttle) * -1);
+        backleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.BACK_LEFT_TALON_ID]) * throttle);
+        backrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.BACK_RIGHT_TALON_ID]) * throttle) * -1);
     }
     public void TankDrive(double yaxis, double xaxis, double throttle) {
         double leftspeed = (yaxis + xaxis) * throttle;
@@ -66,7 +68,7 @@ public class DriveTrain {
         backrightMotor.set(ControlMode.PercentOutput, rightspeed);
     }
     public double getDistanceToWall() {
-        return (Constants.HIGHTTOTAPE - Constants.HIGHTTOCAMERA) / Math.tan(Constants.CAMERAANGLE + Robot.limeLightVision.getContourInfo("ts"));
+        return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.limeLightVision.getContourInfo("ty"));
     }
     public float getYaw() {
         return navx.getYaw();
@@ -93,5 +95,27 @@ public class DriveTrain {
         frontrightMotor.setSelectedSensorPosition(0,0,0);
         backleftMotor.setSelectedSensorPosition(0,0,0);
         backrightMotor.setSelectedSensorPosition(0,0,0);
+    }
+    public void StopMotors() {
+        frontrightMotor.set(ControlMode.PercentOutput, 0);
+        frontleftMotor.set(ControlMode.PercentOutput, 0);
+        backrightMotor.set(ControlMode.PercentOutput, 0);
+        backleftMotor.set(ControlMode.PercentOutput, 0);
+    }
+    public void update() {
+        switch (Robot.drive.getFSMState()){
+            case "Input":
+                Robot.drive.setState(Drive.Input);
+                break;
+            case "Mecanum":
+                Robot.driveTrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.driveTrain.getYaw(), .5);
+                break;
+            case "Tank":
+                Robot.driveTrain.TankDrive(Controls.getY(), Controls.getX(), .5);
+                break;
+            case "Stop":
+                StopMotors();
+                break;
+        }
     }
 }

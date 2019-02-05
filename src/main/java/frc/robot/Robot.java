@@ -1,13 +1,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.Base.Controls;
-import frc.Base.Operator;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.Base.*;
 import frc.StateMachines.*;
 import frc.Subsystems.*;
-import frc.Base.DLibrary;
+import frc.auto.Auto;
 
 public class Robot extends TimedRobot {
+    public static ShuffleboardTab tab =  Shuffleboard.getTab("displays");
 
     public static DLibrary dLibrary;
 
@@ -22,28 +24,28 @@ public class Robot extends TimedRobot {
     public static Arm arm;
     public static Climb climb;
     public static Suction suction;
-
     public void robotInit() {
+        Shuffleboard.setRecordingFileNameFormat(".csv");
 
         dLibrary = new DLibrary();
 
         driveTrain = new DriveTrain();
         limeLightVision = new LimeLightVision();
-        armManipulator = new ArmManipulator();
-        climber = new Climber();
-        vaccum = new Vacuum();
 
         drive = new Drive();
-        arm = new Arm();
         auto = new Auto();
-        climb = new Climb();
-        suction = new Suction();
 
         dLibrary.setDriveTrainType("Tank");
         driveTrain.resetEncoders();
         Operator.update();
     }
-    public void robotPeriodic() {}
+    public void robotPeriodic() {
+        if (Controls.CSVWRITE()) {
+            Shuffleboard.startRecording();
+            Constants.RECORDING_IN_PROGRESS = true;
+        }
+        if (Controls.CSVWRITE() && Constants.RECORDING_IN_PROGRESS) {Shuffleboard.stopRecording();}
+    }
     public void autonomousInit() {
         auto.setState(Auto.ReachLine);
     }

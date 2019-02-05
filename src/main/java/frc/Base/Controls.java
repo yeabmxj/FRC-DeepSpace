@@ -1,6 +1,7 @@
 package frc.Base;
 
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Robot;
 
 public class Controls{
     public static Joystick driveJoy = new Joystick(0);
@@ -26,11 +27,17 @@ public class Controls{
     public static int succBTN;
     public static int climbBTN;
 
-    private static double throttle = Constants.initialThrottle;
+    static double z;
+
+    private static double throttle = Constants.INITIAL_THROTTLE;
 
     public static double getX() { return driveJoy.getRawAxis(xAxis);}
-    public static double getY() { return driveJoy.getRawAxis(yAxis);}
-    public static double getZ() { return driveJoy.getRawAxis(zAxis);}
+    public static double getY() { return -driveJoy.getRawAxis(yAxis);}
+    public static double getZ() {
+        if (!Robot.dLibrary.getDriveTrainType().equals("Mecanum")) {z = 0; }
+        else { z = driveJoy.getRawAxis(zAxis);}
+        return z;
+    }
     public static double getT() {
         if(Operator.getThrottleType().equals("ButtonBased")){
             if (Controls.increaseThrottleBTN()) { throttle += .002;}
@@ -62,4 +69,5 @@ public class Controls{
     public static boolean setArmLevel2() { return systemJoy.getRawButton(level2Button);}
     public static boolean setArmLevel3() { return systemJoy.getRawButton(level3Button);}
     public static boolean suction() { return systemJoy.getRawButton(succBTN);}
+    public static boolean climb() { return systemJoy.getRawButton(climbBTN);}
 }

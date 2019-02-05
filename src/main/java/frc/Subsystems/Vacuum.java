@@ -2,7 +2,6 @@ package frc.Subsystems;
 
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
-import frc.robot.Robot;
 
 public class Vacuum {
 

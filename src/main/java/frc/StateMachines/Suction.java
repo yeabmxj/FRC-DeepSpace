@@ -12,15 +12,13 @@ public class Suction extends State {
     public void update() {
         switch (state) {
             case STOP:
-                if (Controls.suction()) {setState(SUCCAGE);}
-                else{
-                    Robot.vaccum.succ(0);
-                    Robot.vaccum.setAngle(90);
-                }
+                Robot.vaccum.succ(0);
+                Robot.vaccum.setAngle(90);
+                setState(Controls.suction() ? SUCCAGE : STOP);
                 break;
             case SUCCAGE:
-                if (Controls.suction()) {setState(STOP);}
-                else {Robot.vaccum.succ(Constants.SparkSuctionSpeed);}
+                Robot.vaccum.succ(Constants.SPARK_SUCTION_SPEED);
+                setState(Controls.suction() ? STOP : SUCCAGE);
                 break;
         }
     }

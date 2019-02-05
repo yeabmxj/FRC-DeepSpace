@@ -1,8 +1,9 @@
-package frc.StateMachines;
+package frc.auto;
 
 import frc.Base.Constants;
 import frc.Base.State;
 import frc.Base.PID;
+import frc.StateMachines.Drive;
 import frc.robot.Robot;
 
 public class Auto extends State {
@@ -60,9 +61,9 @@ public class Auto extends State {
                     }
                 }
                 break;
-            case GetinRange:updateControllers
+            case GetinRange:
                 Robot.driveTrain.resetEncoders();
-                PID.getPID(Constants.IRWallDistanceVoltage, Robot.driveTrain.distanceToWallSensor.getVoltage());
+                PID.getPID(Constants.IR_WALL_DISTANCE_VOLTAGE, Robot.driveTrain.distanceToWallSensor.getVoltage());
                 Robot.driveTrain.TankDrive(PID.error,0,.5);
                 if (PID.error <= distanceTolerance) {
                     setState(Drive.Input);
