@@ -24,9 +24,10 @@ public class Robot extends TimedRobot {
     public static Arm arm;
     public static Climb climb;
     public static Suction suction;
-    public void robotInit() {
-        Shuffleboard.setRecordingFileNameFormat(".csv");
 
+    PID PIDLoop;
+
+    public void robotInit() {
         dLibrary = new DLibrary();
 
         driveTrain = new DriveTrain();
@@ -40,15 +41,9 @@ public class Robot extends TimedRobot {
         Operator.update();
     }
     public void robotPeriodic() {
-        if (Controls.CSVWRITE()) {
-            Shuffleboard.startRecording();
-            Constants.RECORDING_IN_PROGRESS = true;
-        }
-        if (Controls.CSVWRITE() && Constants.RECORDING_IN_PROGRESS) {Shuffleboard.stopRecording();}
+        Operator.update();
     }
-    public void autonomousInit() {
-        auto.setState(Auto.ReachLine);
-    }
+    public void autonomousInit() { }
     public void autonomousPeriodic() {
         auto.update();
     }
@@ -56,12 +51,16 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         driveTrain.resetGyro();
         drive.setState(Drive.Input);
+        drive.update();
+        driveTrain.update();
     }
     public void teleopPeriodic() {
         if (Controls.Vision()) {
             limeLightVision.setCameraControls("camMode", 0);
-            auto.setState(Auto.ReachLine);
         }
-        else { drive.update();}
+        else {
+            drive.update();
+            driveTrain.update();
+        }
     }
 }

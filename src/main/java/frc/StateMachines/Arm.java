@@ -13,29 +13,31 @@ public class Arm extends State {
      */
 
     public static final int Input = 0;
-    public static final int CurrentlyMoving = 5;
-    public static final int ManualMove = 6;
+    public static final int Moving = 1;
+
+    public void initState() {
+        setFSMState("HOME");
+    }
 
     public void update() {
         switch (state) {
             case Input:
-                setFSMState("home");
-                setFSMState(
-                        Controls.setArmLevel1() ? "level 1" :
-                        Controls.setArmLevel2() ? "level 2" :
-                        Controls.setArmLevel3() ? "level 3" :
-                        Controls.home() ? "home" : "input");
+                System.out.println(INUSE ? getFSMState() + " is currently in use" : "not in use");
+                setFSMState(INUSE ? getFSMState() :
+                        (Controls.setArmLevel1() ? "LEVEL 1" :
+                        Controls.setArmLevel2() ? "LEVEL 2" :
+                        Controls.setArmLevel3() ? "LEVEL 3" :
+                        Controls.home() ? "HOME" : "INPUT"));
                 setState(
-                        getFSMState().equals("level 1") ||
-                        getFSMState().equals("level 2") ||
-                        getFSMState().equals("level 3") ||
-                        getFSMState().equals("home") ? CurrentlyMoving : Input);
+                        getFSMState().equals("LEVEL 1") ||
+                        getFSMState().equals("LEVEL 2") ||
+                        getFSMState().equals("LEVEL 3") ||
+                        getFSMState().equals("HOME") ? Moving : Input);
                 break;
-            case CurrentlyMoving:
-                Robot.armManipulator.updateLevel();
-                Robot.armManipulator.updateSpeed();
-                setFSMState(Robot.armManipulator.getSpeed() == 0 ? "stopped" : "moving");
-                setState(getFSMState().equals("stopped") ? Input : CurrentlyMoving);
+            case Moving:
+                Robot.armManipulator.update();
+                setFSMState(Robot.armManipulator.getSpeed() == 0 ? "STOPPED" : "INPUT");
+                setState(getFSMState().equals("STOPPED") ? Input : Moving);
                 break;
                 }
         }

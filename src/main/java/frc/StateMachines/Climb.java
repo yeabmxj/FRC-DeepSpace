@@ -5,15 +5,9 @@ import frc.Base.Controls;
 import frc.Base.State;
 import frc.robot.Robot;
 
-import java.security.cert.Extension;
-
 public class Climb extends State {
     public static final int INPUT = 0;
     public static final int EXTENDING = 2;
-    public static final int REACHED = 3;
-
-    private double up = 10;
-    private double forward = 10;
 
     public void update() {
         switch (state){
@@ -21,6 +15,7 @@ public class Climb extends State {
                 setFSMState("Not Extended");
                 setFSMState(Timer.getFPGATimestamp() >= 135 && Controls.climb() ? "Extending" : "Not Extending");
                 setState(getFSMState().equals("Extending") ? EXTENDING : INPUT);
+                Robot.climber.update();
                 break;
         }
     }

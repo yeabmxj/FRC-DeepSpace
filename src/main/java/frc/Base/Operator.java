@@ -1,4 +1,7 @@
 package frc.Base;
+
+import frc.Base.Joysticks.*;
+
 public class Operator {
     /*
     Controller (Gamepad F310)
@@ -7,198 +10,102 @@ public class Operator {
     Logitech Extreme 3D
     Logitech RumblePad 2 USB
      */
-    private static String driver = "";
-    private static String subdriver = "";
-    private static String ThrottleType = "";
-    private static void setThrottleType(String type) {ThrottleType = type;}
-    public static String getThrottleType() { return ThrottleType;}
-    private static void setAxis(int x, int y, int z) {
-        Controls.xAxis = x;
-        Controls.yAxis = y;
-        Controls.zAxis = z;
-    }
-    private static void setThrottleControls(int incBTN, int decBTN, int incAxis, int decAxis, int monoThrotAxis) {
-        if (getThrottleType().equals("ButtonBased")){
-            Controls.incThrotButton = incBTN;
-            Controls.decThrotButton = decBTN;
-        }
-        else if (getThrottleType().equals("TwoAxisBased")){
-            Controls.incThrotAxis = incAxis;
-            Controls.decThrotAxis = decAxis;
-        }
-        else if (getThrottleType().equals("OneAxisBased")){
-            Controls.monoThrotAxis = monoThrotAxis;
-        }
-    }
-    private static void setArmControls(int home, int l1, int l2, int l3) {
-        Controls.homeButton = home;
-        Controls.level1Button = l1;
-        Controls.level2Button = l2;
-        Controls.level3Button = l3;
-    }
-    private static void setVaccumControls(int succ) { Controls.succBTN = succ; }
-    private static void setClimberControls(int climb) { Controls.climbBTN = climb; }
-    private static void setLimeLightControls(int vision) { Controls.visionButton = vision; }
 
-    public static String getDriver() {
-        return driver =
-                Controls.driveJoy.getName().equals("Controller (Xbox One For Windows)") ? "Eyosias" :
-                Controls.driveJoy.getName().equals("a") ? "Alex" :
-                Controls.driveJoy.getName().equals("j") ? "Jacob" :
-                Controls.driveJoy.getName().equals("z") ? "Zach" :
-                Controls.driveJoy.getName().equals("n") ? "Noah" : "Default";
-    }
-    public static String getSubDriver() {
-        return subdriver =
-                Controls.systemJoy.getName().equals("e") ? "Eyosias" :
-                Controls.systemJoy.getName().equals("a") ? "Alex" :
-                Controls.systemJoy.getName().equals("j") ? "Jacob" :
-                Controls.systemJoy.getName().equals("z") ? "Zach" :
-                Controls.systemJoy.getName().equals("n") ? "Noah" : "Default";
-    }
     private static void updateDriveController() {
-        switch(getDriver()) {
-            case "Eyosias":
-                setAxis(1,4,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Alex":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Jacob":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Zach":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Noah":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
+        switch(Controls.driveJoy.getName()) {
+            case "Controller (Gamepad F310)":
+                Controller_Gamepad_F310.DriveJOY();
+                break;
+            case "T.16000M":
+                T_16000M.DriveJOY();
+                break;
+            case "Controller (Xbox One For Windows)":
+                Controller_Xbox_One_For_Windows.DriveJOY();
+                break;
+            case "Logitech Extreme 3D":
+                Logitech_Extreme_3D.DriveJOY();
+                break;
+            case "Logitech RumblePad 2 USB":
+                Logitech_RumblePad_2_USB.DriveJOY();
+                break;
+            case "MAYFLASH GameCube Controller Adapter":
+                MAYFLASH_GameCube_Controller_Adapter.DriveJOY();
+                break;
         }
     }
     private static void updateSubDriveController() {
-        switch(getSubDriver()) {
-            case "Eyosias":
-                setAxis(1,4,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Alex":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Jacob":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Zach":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-            case "Noah":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
+        switch(Controls.systemJoy.getName()) {
+            case "Controller (Gamepad F310)":
+                Controller_Gamepad_F310.SystemJOY();
+                break;
+            case "T.16000M":
+                T_16000M.SystemJOY();
+                break;
+            case "Controller (Xbox One For Windows)":
+                Controller_Xbox_One_For_Windows.SystemJOY();
+                break;
+            case "Logitech Extreme 3D":
+                Logitech_Extreme_3D.SystemJOY();
+                break;
+            case "Logitech RumblePad 2 USB":
+                Logitech_RumblePad_2_USB.SystemJOY();
+                break;
+            case "MAYFLASH GameCube Controller Adapter":
+                MAYFLASH_GameCube_Controller_Adapter.SystemJOY();
+                break;
         }
     }
-    private static void updateNoDriver() {
-        switch (getSubDriver()) {
-            case "Eyosias":
-                setAxis(1,4,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Alex":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Jacob":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Zach":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Noah":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
+    private static void updateControllerNotDetected() {
+        if (Controls.driveJoy == null || Controls.driveJoy.getButtonCount() == 0) {
+            switch (Controls.systemJoy.getName()) {
+                case "Controller (Gamepad F310)":
+                    Controller_Gamepad_F310.OmniJOY();
+                    break;
+                case "T.16000M":
+                    T_16000M.OmniJOY();
+                    break;
+                case "Controller (Xbox One For Windows)":
+                    Controller_Xbox_One_For_Windows.OmniJOY();
+                    break;
+                case "Logitech Extreme 3D":
+                    Logitech_Extreme_3D.OmniJOY();
+                    break;
+                case "Logitech RumblePad 2 USB":
+                    Logitech_RumblePad_2_USB.OmniJOY();
+                    break;
+                case "MAYFLASH GameCube Controller Adapter":
+                    MAYFLASH_GameCube_Controller_Adapter.OmniJOY();
+                    break;
+            }
         }
-    }
-    private static void updateNoSubDriver() {
-        switch (getDriver()) {
-            case "Eyosias":
-                setAxis(1,4,3);
-                setThrottleType("ButtonBased");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(3,4,5,6);
-                setVaccumControls(7);
-                setClimberControls(8);
-                setLimeLightControls(9);
-            case "Alex":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Jacob":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Zach":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
-            case "Noah":
-                setAxis(1,2,3);
-                setThrottleType("");
-                setThrottleControls(1,2,0,0,0);
-                setArmControls(1,2,3,4);
-                setVaccumControls(1);
-                setClimberControls(1);
-                setLimeLightControls(1);
+        else if (Controls.systemJoy == null || Controls.systemJoy.getButtonCount() == 0) {
+            switch (Controls.driveJoy.getName()) {
+                case "Controller (Gamepad F310)":
+                    Controller_Gamepad_F310.OmniJOY();
+                    break;
+                case "T.16000M":
+                    T_16000M.OmniJOY();
+                    break;
+                case "Controller (Xbox One For Windows)":
+                    Controller_Xbox_One_For_Windows.OmniJOY();
+                    break;
+                case "Logitech Extreme 3D":
+                    Logitech_Extreme_3D.OmniJOY();
+                    break;
+                case "Logitech RumblePad 2 USB":
+                    Logitech_RumblePad_2_USB.OmniJOY();
+                    break;
+                case "MAYFLASH GameCube Controller Adapter":
+                    MAYFLASH_GameCube_Controller_Adapter.OmniJOY();
+                    break;
+            }
         }
-    }
-    private static void updateControllers() {
-        updateDriveController();
-        updateSubDriveController();
     }
     public static void update() {
-        if (Controls.driveJoy == null) { updateNoDriver();}
-        else if (Controls.systemJoy == null) { updateNoSubDriver();}
-        else { updateControllers();}
+        if ((Controls.driveJoy.getButtonCount() == 0 || Controls.driveJoy == null) || (Controls.driveJoy.getButtonCount() == 0 || Controls.systemJoy == null)) { updateControllerNotDetected();}
+        else {
+            updateDriveController();
+            updateSubDriveController();
+        }
     }
 }

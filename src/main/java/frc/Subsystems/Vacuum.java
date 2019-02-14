@@ -16,13 +16,10 @@ public class Vacuum {
         armHead = new Servo(servochannel);
         pump = new Spark(pumpchannel);
     }
-    public void succ(double succspeed) {
+    public void setSuccageSpeed(double succspeed) {
         pump.set(succspeed);
     }
-    public void setAngle(double angle) {
+    public void setHeadAngle(double angle) {
         armHead.set(angle);
-    }
-    public void faceground() {
-        armHead.set(groundangle);
     }
 }

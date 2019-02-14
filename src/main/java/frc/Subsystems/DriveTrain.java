@@ -51,7 +51,7 @@ public class DriveTrain {
         wheelSpeeds[Constants.BACK_LEFT_TALON_ID] = processed[0] + processed[1] + zaxis;
         wheelSpeeds[Constants.BACK_RIGHT_TALON_ID] = processed[0] + processed[1] - zaxis;
 
-        Robot.dLibrary.normalize(wheelSpeeds);
+        Robot.dLibrary.normalizeMecanum(wheelSpeeds);
 
         frontleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.FRONT_LEFT_TALON_ID]) * throttle);
         frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FRONT_RIGHT_TALON_ID]) * throttle) * -1);
@@ -66,6 +66,14 @@ public class DriveTrain {
         backleftMotor.set(ControlMode.PercentOutput, leftspeed);
         frontrightMotor.set(ControlMode.PercentOutput, rightspeed);
         backrightMotor.set(ControlMode.PercentOutput, rightspeed);
+    }
+    public void TankLeft(double speed) {
+        frontleftMotor.set(ControlMode.PercentOutput, speed);
+        backleftMotor.set(ControlMode.PercentOutput, speed);
+    }
+    public void TankRight(double speed) {
+        frontrightMotor.set(ControlMode.PercentOutput, speed);
+        backrightMotor.set(ControlMode.PercentOutput, speed);
     }
     public double getDistanceToWall() {
         return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.limeLightVision.getContourInfo("ty"));
@@ -115,6 +123,15 @@ public class DriveTrain {
                 break;
             case "Stop":
                 StopMotors();
+                break;
+        }
+    }
+    public void updateAuto() {
+        switch (Robot.auto.getFSMState()) {
+            case "Auto":
+                break;
+            case "Manual":
+                Robot.drive.update();
                 break;
         }
     }

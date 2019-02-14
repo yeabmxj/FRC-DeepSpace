@@ -1,8 +1,11 @@
 package frc.Base;
 
 public class State {
+    public boolean INUSE = false;
+
     public int state = 0;
     public void update() {}
+    public void initState() {}
     public void setState(int s) { state = s;}
 
     private static String currentState = "";

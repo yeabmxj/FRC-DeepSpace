@@ -31,26 +31,58 @@ public class Controls{
 
     private static double throttle = Constants.INITIAL_THROTTLE;
 
-    public static double getX() { return driveJoy.getRawAxis(xAxis);}
-    public static double getY() { return -driveJoy.getRawAxis(yAxis);}
+
+    public static String ThrottleType = "";
+
+    public static void setThrottleType(String type) {ThrottleType = type;}
+    public static String getThrottleType() { return ThrottleType;}
+
+    public static void setAxis(int x, int y, int z) {
+        Controls.xAxis = x;
+        Controls.yAxis = y;
+        Controls.zAxis = z;
+    }
+
+    public static void setMonoThrottleAxis(int tAxis) { Controls.monoThrotAxis = tAxis; }
+    public static void setBiThrottleAxis(int tAxisUp, int tAxisDown) {
+        Controls.incThrotAxis = tAxisUp;
+        Controls.decThrotAxis = tAxisDown;
+    }
+    public static void setThrottleButtons(int tBTNUp, int tBTNDown) {
+        Controls.incThrotButton = tBTNUp;
+        Controls.decThrotButton = tBTNDown;
+    }
+
+    public static void setArmControls(int home, int l1, int l2, int l3) {
+        Controls.homeButton = home;
+        Controls.level1Button = l1;
+        Controls.level2Button = l2;
+        Controls.level3Button = l3;
+    }
+    public static void setVaccumControls(int succ) { Controls.succBTN = succ; }
+    public static void setClimberControls(int climb) { Controls.climbBTN = climb; }
+    public static void setLimeLightControls(int vision) { Controls.visionButton = vision; }
+
+    public static double getX() { return -driveJoy.getRawAxis(xAxis);}
+    public static double getY() { return driveJoy.getRawAxis(yAxis);}
     public static double getZ() {
         if (!Robot.dLibrary.getDriveTrainType().equals("Mecanum")) {z = 0; }
         else { z = driveJoy.getRawAxis(zAxis);}
         return z;
     }
     public static double getT() {
-        if(Operator.getThrottleType().equals("ButtonBased")){
+        if(getThrottleType().equals("Button Based")){
             if (Controls.increaseThrottleBTN()) { throttle += .002;}
             if (Controls.decreaseThrottleBTN()) { throttle -= .002;}
             if (throttle > 1) { throttle = 1;}
             if (throttle < 0) { throttle = 0;}
         }
-        else if(Operator.getThrottleType().equals("TwoAxisBased")){
+        else if(getThrottleType().equals("Two Axis Based")){
             throttle += .005 * (increaseThrottleAxis() - decreaseThrottleAxis());
             if (throttle > 1) { throttle = 1;}
             if (throttle < 0) { throttle = 0;}
         }
-        else if (Operator.getThrottleType().equals("OneAxisBased")) {
+        else if (getThrottleType().equals("One Axis Based")) {
             throttle = (monoThrottleAxis() + 1) / 2;
         }
         return throttle;

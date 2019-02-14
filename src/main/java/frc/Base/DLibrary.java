@@ -62,7 +62,7 @@ public class DLibrary{
           return 0.0;
         }
       }
-    public void normalize(double[] wheelSpeeds) {
+    public void normalizeMecanum(double[] wheelSpeeds) {
         double maxMagnitude = Math.abs(wheelSpeeds[0]);
         for (int i = 1; i < wheelSpeeds.length; i++) {
             double temp = Math.abs(wheelSpeeds[i]);
@@ -76,4 +76,8 @@ public class DLibrary{
             }
         }
     }
+    // private double normalize(double value, double max, double min) {
+    //     return ((value - min) / (max - min));
+    // }
+
 }
