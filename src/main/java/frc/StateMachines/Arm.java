@@ -4,6 +4,8 @@ import frc.Base.Controls;
 import frc.Base.State;
 import frc.robot.Robot;
 
+import java.util.Objects;
+
 public class Arm extends State {
 
     /* List of states

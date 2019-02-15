@@ -23,6 +23,12 @@ public class Constants{
     public static final double LEVEL_2_HEIGHT = 30;
     public static final double LEVEL_3_HEIGHT = 40;
 
+    //Wrist
+    public static final int WRIST_X_MOVER = 1;
+    public static final int WRIST_Y_MOVER = 2;
+    public static final int WRIST_X_LIMIT = 1;
+    public static final int WRIST_Y_LIMIT = 2;
+
     //ID's
     public static final int FRONT_LEFT_TALON_ID = 1;
     public static final int FRONT_RIGHT_TALON_ID = 2;

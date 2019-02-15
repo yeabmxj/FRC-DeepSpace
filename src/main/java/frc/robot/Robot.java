@@ -55,6 +55,10 @@ public class Robot extends TimedRobot {
         driveTrain.update();
     }
     public void teleopPeriodic() {
+        System.out.println(Controls.home() ? "Home called" : "Home not called");
+        System.out.println(Controls.setArmLevel1() ? "L1 called" : "L1 not called");
+        System.out.println(Controls.setArmLevel2() ? "L2 called" : "L2 not called");
+        System.out.println(Controls.setArmLevel3() ? "L3 called" : "L3 not called");
         if (Controls.Vision()) {
             limeLightVision.setCameraControls("camMode", 0);
         }

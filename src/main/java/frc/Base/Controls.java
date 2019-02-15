@@ -4,66 +4,67 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
 
 public class Controls{
-    public static Joystick driveJoy = new Joystick(0);
-    public static Joystick systemJoy = new Joystick(1);
+    static Joystick driveJoy = new Joystick(0);
+    static Joystick systemJoy = new Joystick(1);
 
-    public static int xAxis;
-    public static int yAxis;
-    public static int zAxis;
+    private static int xAxis;
+    private static int yAxis;
+    private static int zAxis;
     public static int tAxis;
-    public static int incThrotButton;
-    public static int incThrotAxis;
-    public static int decThrotButton;
-    public static int decThrotAxis;
-    public static int monoThrotAxis;
+    private static int axisDirection;
+    private static int incThrotButton;
+    private static int incThrotAxis;
+    private static int decThrotButton;
+    private static int decThrotAxis;
+    private static int monoThrotAxis;
 
-    public static int visionButton;
+    private static double z;
+
+    private static int visionButton;
     public static int CSVreadButton;
     public static int CSVwriteButton;
-    public static int level1Button;
-    public static int level2Button;
-    public static int level3Button;
-    public static int homeButton;
-    public static int succBTN;
-    public static int climbBTN;
-
-    static double z;
+    private static int level1Button;
+    private static int level2Button;
+    private static int level3Button;
+    private static int homeButton;
+    private static int succBTN;
+    private static int climbBTN;
 
     private static double throttle = Constants.INITIAL_THROTTLE;
 
+    private static String ThrottleType = "";
 
-    public static String ThrottleType = "";
+    protected static void setThrottleType(String type) {ThrottleType = type;}
+    private static String getThrottleType() { return ThrottleType;}
 
-    public static void setThrottleType(String type) {ThrottleType = type;}
-    public static String getThrottleType() { return ThrottleType;}
-
-    public static void setAxis(int x, int y, int z) {
-        Controls.xAxis = x;
-        Controls.yAxis = y;
-        Controls.zAxis = z;
+    protected static void setAxis(int x, int y, int z, int direction) {
+        xAxis = x;
+        yAxis = y;
+        zAxis = z;
+        axisDirection = direction;
     }
 
-    public static void setMonoThrottleAxis(int tAxis) { Controls.monoThrotAxis = tAxis; }
+    public static void setMonoThrottleAxis(int tAxis) { monoThrotAxis = tAxis; }
     public static void setBiThrottleAxis(int tAxisUp, int tAxisDown) {
-        Controls.incThrotAxis = tAxisUp;
-        Controls.decThrotAxis = tAxisDown;
+        incThrotAxis = tAxisUp;
+        decThrotAxis = tAxisDown;
     }
     public static void setThrottleButtons(int tBTNUp, int tBTNDown) {
-        Controls.incThrotButton = tBTNUp;
-        Controls.decThrotButton = tBTNDown;
+        incThrotButton = tBTNUp;
+        decThrotButton = tBTNDown;
     }
 
     public static void setArmControls(int home, int l1, int l2, int l3) {
-        Controls.homeButton = home;
-        Controls.level1Button = l1;
-        Controls.level2Button = l2;
-        Controls.level3Button = l3;
+        homeButton = home;
+        level1Button = l1;
+        level2Button = l2;
+        level3Button = l3;
     }
-    public static void setVaccumControls(int succ) { Controls.succBTN = succ; }
+    public static void setVaccumControls(int succ) { succBTN = succ; }
     public static void setClimberControls(int climb) { Controls.climbBTN = climb; }
     public static void setLimeLightControls(int vision) { Controls.visionButton = vision; }
 
-    public static double getX() { return -driveJoy.getRawAxis(xAxis);}
+    public static double getX() { return axisDirection * driveJoy.getRawAxis(xAxis);}
     public static double getY() { return driveJoy.getRawAxis(yAxis);}
     public static double getZ() {
         if (!Robot.dLibrary.getDriveTrainType().equals("Mecanum")) {z = 0; }
@@ -94,8 +95,6 @@ public class Controls{
     public static double monoThrottleAxis() { return driveJoy.getRawAxis(monoThrotAxis);}
 
     public static boolean Vision() { return systemJoy.getRawButton(visionButton);}
-    public static boolean CSVREAD() { return systemJoy.getRawButton(CSVreadButton);}
-    public static boolean CSVWRITE() { return systemJoy.getRawButton(CSVwriteButton);}
     public static boolean home() { return systemJoy.getRawButton(homeButton);}
     public static boolean setArmLevel1() { return systemJoy.getRawButton(level1Button);}
     public static boolean setArmLevel2() { return systemJoy.getRawButton(level2Button);}

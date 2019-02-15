@@ -5,7 +5,7 @@ import frc.Base.Controls;
 public class Logitech_RumblePad_2_USB extends Controls {
     public static void DriveJOY() {
         setThrottleType("One Axis Based");
-        setAxis(1,4,1);
+        setAxis(1,4,1, -1);
         setMonoThrottleAxis(3);
     }
     public static void SystemJOY() {
@@ -16,7 +16,7 @@ public class Logitech_RumblePad_2_USB extends Controls {
     }
     public static void OmniJOY() {
         setThrottleType("One Axis Based");
-        setAxis(1,4,1);
+        setAxis(1,4,1, -1);
         setMonoThrottleAxis(3);
         setArmControls(1,2,3,4);
         setVaccumControls(5);
