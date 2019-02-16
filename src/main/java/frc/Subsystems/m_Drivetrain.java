@@ -3,17 +3,15 @@ package frc.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.SPI;
 
 import frc.Base.Constants;
 import frc.Base.Controls;
-import frc.StateMachines.Drive;
+import frc.StateMachines.*;
 import frc.robot.*;
 
-public class DriveTrain {
+public class m_Drivetrain {
 
     public TalonSRX frontleftMotor;
     public TalonSRX frontrightMotor; 
@@ -22,9 +20,7 @@ public class DriveTrain {
 
     public AnalogInput distanceToWallSensor;
 
-    public AHRS navx;
-
-    public DriveTrain() {
+    public m_Drivetrain() {
         frontleftMotor = new TalonSRX(Constants.FRONT_LEFT_TALON_ID);
         frontrightMotor = new TalonSRX(Constants.FRONT_RIGHT_TALON_ID);
         backleftMotor = new TalonSRX(Constants.BACK_LEFT_TALON_ID);
@@ -36,8 +32,7 @@ public class DriveTrain {
         frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        
-        navx = new AHRS(SPI.Port.kMXP);
+
     }
     public void MecanumDrive(double yaxis, double xaxis, double zaxis, double gyroangle, double throttle) {
         yaxis = Robot.dLibrary.applyDeadband(Robot.dLibrary.limit(yaxis));
@@ -76,13 +71,7 @@ public class DriveTrain {
         backrightMotor.set(ControlMode.PercentOutput, speed);
     }
     public double getDistanceToWall() {
-        return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.limeLightVision.getContourInfo("ty"));
-    }
-    public float getYaw() {
-        return navx.getYaw();
-    }
-    public void resetGyro() {
-        navx.reset();
+        return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.eLimeLightVision.getContourInfo("ty"));
     }
     public double getVoltage() {
         return distanceToWallSensor.getVoltage();
@@ -111,15 +100,15 @@ public class DriveTrain {
         backleftMotor.set(ControlMode.PercentOutput, 0);
     }
     public void update() {
-        switch (Robot.drive.getFSMState()){
+        switch (Robot.i_drivetrain.getFSMState()){
             case "Input":
-                Robot.drive.setState(Drive.Input);
+                Robot.i_drivetrain.setState(i_Drivetrain.Input);
                 break;
             case "Mecanum":
-                Robot.driveTrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.driveTrain.getYaw(), .5);
+                Robot.m_drivetrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.eNavx.getYaw(), .5);
                 break;
             case "Tank":
-                Robot.driveTrain.TankDrive(Controls.getY(), Controls.getX(), .5);
+                Robot.m_drivetrain.TankDrive(Controls.getY(), Controls.getX(), .5);
                 break;
             case "Stop":
                 StopMotors();
@@ -127,11 +116,12 @@ public class DriveTrain {
         }
     }
     public void updateAuto() {
-        switch (Robot.auto.getFSMState()) {
-            case "Auto":
+        switch (Robot.i_auto.getFSMState()) {
+            case "":
+                Robot.i_auto.update();
                 break;
             case "Manual":
-                Robot.drive.update();
+                Robot.i_drivetrain.update();
                 break;
         }
     }

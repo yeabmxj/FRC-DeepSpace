@@ -5,7 +5,7 @@ import frc.Base.Controls;
 import frc.Base.State;
 import frc.robot.Robot;
 
-public class Climb extends State {
+public class i_Climber extends State {
     public static final int INPUT = 0;
     public static final int EXTENDING = 2;
 
@@ -15,7 +15,7 @@ public class Climb extends State {
                 setFSMState("Not Extended");
                 setFSMState(Timer.getFPGATimestamp() >= 135 && Controls.climb() ? "Extending" : "Not Extending");
                 setState(getFSMState().equals("Extending") ? EXTENDING : INPUT);
-                Robot.climber.update();
+                Robot.m_climber.update();
                 break;
         }
     }

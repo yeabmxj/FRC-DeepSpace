@@ -4,14 +4,14 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.Base.Constants;
 
-public class Wrist {
+public class m_Wrist {
     VictorSPX xTranslation;
     VictorSPX yTranslation;
 
     DigitalInput leftXLimit;
     DigitalInput rightXLimit;
 
-    public Wrist() {
+    public m_Wrist() {
         xTranslation = new VictorSPX(Constants.WRIST_X_MOVER);
         yTranslation = new VictorSPX(Constants.WRIST_Y_MOVER);
 

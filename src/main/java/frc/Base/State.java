@@ -10,4 +10,8 @@ public class State {
     private static String currentState = "";
     public static void setFSMState(String state) { currentState = state;}
     public String getFSMState() { return currentState;}
+
+    private static String messageToBeSent = "";
+    public static void setMessage(String message) { messageToBeSent = message;}
+    public String getMessage() { return messageToBeSent;}
 }

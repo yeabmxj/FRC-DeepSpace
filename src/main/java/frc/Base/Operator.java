@@ -102,7 +102,11 @@ public class Operator {
         }
     }
     public static void update() {
-        if ((Controls.driveJoy.getButtonCount() == 0 || Controls.driveJoy == null) || (Controls.driveJoy.getButtonCount() == 0 || Controls.systemJoy == null)) { updateControllerNotDetected();}
+        if (
+            Controls.driveJoy.getButtonCount() == 0 ||
+            Controls.driveJoy == null ||
+            Controls.driveJoy.getButtonCount() == 0 ||
+            Controls.systemJoy == null) { updateControllerNotDetected();}
         else {
             updateDriveController();
             updateSubDriveController();

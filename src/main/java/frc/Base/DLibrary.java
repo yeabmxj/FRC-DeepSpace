@@ -24,20 +24,20 @@ public class DLibrary{
         return out;
     }
     public void verify() {
-        if (Robot.driveTrain.frontleftMotor != null && Robot.driveTrain.frontrightMotor != null && Robot.driveTrain.backleftMotor != null && Robot.driveTrain.backrightMotor != null) {
+        if (Robot.m_drivetrain.frontleftMotor != null && Robot.m_drivetrain.frontrightMotor != null && Robot.m_drivetrain.backleftMotor != null && Robot.m_drivetrain.backrightMotor != null) {
             return;
         }
         StringJoiner joiner = new StringJoiner(", ");
-        if (Robot.driveTrain.frontleftMotor == null) {
+        if (Robot.m_drivetrain.frontleftMotor == null) {
             joiner.add("frontleftMotor");
         }
-        if (Robot.driveTrain.frontrightMotor == null) {
+        if (Robot.m_drivetrain.frontrightMotor == null) {
             joiner.add("frontrightMotor");
         }
-        if (Robot.driveTrain.backleftMotor == null) {
+        if (Robot.m_drivetrain.backleftMotor == null) {
             joiner.add("backleftMotor");
         }
-        if (Robot.driveTrain.backrightMotor == null) {
+        if (Robot.m_drivetrain.backrightMotor == null) {
             joiner.add("backrightMotor");
         }
         throw new NullPointerException(joiner.toString());

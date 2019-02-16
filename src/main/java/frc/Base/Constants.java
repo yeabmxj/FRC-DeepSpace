@@ -15,13 +15,12 @@ public class Constants{
     //Vacuum
     public static final double SPARK_SUCTION_SPEED = .75;
 
-    //Arm
     public static final double ARM_SPEED_MULTIPLIER = .7;
 
-    public static final double HOME_HEIGHT = 10;
-    public static final double LEVEL_1_HEIGHT = 20;
-    public static final double LEVEL_2_HEIGHT = 30;
-    public static final double LEVEL_3_HEIGHT = 40;
+    public static final double HOME_HEIGHT = -50;
+    public static final double LEVEL_1_HEIGHT = 200;
+    public static final double LEVEL_2_HEIGHT = 300;
+    public static final double LEVEL_3_HEIGHT = 400;
 
     //Wrist
     public static final int WRIST_X_MOVER = 1;
@@ -40,5 +39,10 @@ public class Constants{
 
     public static final int UP_CLIMBER_VICTOR_ID = 1;
     public static final int FORWARD_CLIMBER_VICTOR_ID = 2;
+
+    //Tolerances
+    public static final int FORWARD_TOLERANCE = 1;
+    public static final int TURN_TOLERANCE = 1;
+    public static final int ACTUATION_TOLERANCE = 1;
 
 }

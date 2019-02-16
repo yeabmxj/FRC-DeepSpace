@@ -3,15 +3,14 @@ package frc.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.Base.Constants;
-import frc.StateMachines.Arm;
 import frc.robot.Robot;
 
-public class Climber {
+public class m_Climber {
 
     public VictorSPX climbUp;
     public VictorSPX climbForward;
 
-    public Climber() {
+    public m_Climber() {
         climbUp = new VictorSPX(Constants.UP_CLIMBER_VICTOR_ID);
         climbForward = new VictorSPX(Constants.FORWARD_CLIMBER_VICTOR_ID);
     }
@@ -26,16 +25,16 @@ public class Climber {
         return climbForward.getSelectedSensorPosition(0);
     }
     public void update() {
-        switch(Robot.climb.getFSMState()) {
+        switch(Robot.i_climber.getFSMState()) {
             case "Extending":
-                if (Robot.climber.getExtensionUP() != Constants.CLIMB_UP_HEIGHT || Robot.climber.getExtensionForward() != Constants.CLIMB_FORWARD_HEIGHT) {
-                    Robot.climber.climb(Constants.CLIMB_UP_HEIGHT, Constants.CLIMB_FORWARD_HEIGHT); }
-                else { Robot.arm.setState(Arm.Input); }
+                if (Robot.m_climber.getExtensionUP() != Constants.CLIMB_UP_HEIGHT || Robot.m_climber.getExtensionForward() != Constants.CLIMB_FORWARD_HEIGHT) {
+                    Robot.m_climber.climb(Constants.CLIMB_UP_HEIGHT, Constants.CLIMB_FORWARD_HEIGHT); }
+                else { Robot.i_arm.setState(Robot.i_climber.INPUT); }
                 break;
             case "Not Extending":
-                if(Robot.climber.getExtensionUP() != 0 || Robot.climber.getExtensionForward() != 0) {
-                    Robot.climber.climb(-Constants.CLIMB_UP_HEIGHT, -Constants.CLIMB_FORWARD_HEIGHT); }
-                else { Robot.climber.climb(0,0); }
+                if(Robot.m_climber.getExtensionUP() != 0 || Robot.m_climber.getExtensionForward() != 0) {
+                    Robot.m_climber.climb(-Constants.CLIMB_UP_HEIGHT, -Constants.CLIMB_FORWARD_HEIGHT); }
+                else { Robot.m_climber.climb(0,0); }
                 break;
         }
     }
