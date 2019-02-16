@@ -26,7 +26,7 @@ public class m_Drivetrain {
         backleftMotor = new TalonSRX(Constants.BACK_LEFT_TALON_ID);
         backrightMotor = new TalonSRX(Constants.BACK_RIGHT_TALON_ID);
 
-        distanceToWallSensor = new AnalogInput(Constants.DISTANCE_TO_WALL_SENSOR);
+        distanceToWallSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
         
         frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
@@ -77,15 +77,7 @@ public class m_Drivetrain {
         return distanceToWallSensor.getVoltage();
     }
     public double getEncodervalues() {
-        double backleftDist = backleftMotor.getSelectedSensorPosition(0);
-        double backrightDist = backrightMotor.getSelectedSensorPosition(0);
-        double frontleftDist = frontleftMotor.getSelectedSensorPosition(0);
-        double frontrightDist = frontrightMotor.getSelectedSensorPosition(0);
-
-        double frontAverage = (frontleftDist + frontrightDist) / 2;
-        double backAverage = (backleftDist + backrightDist) / 2;
-
-        return (frontAverage + backAverage) / 1440 * 6 * Math.PI / 12;
+        return frontrightMotor.getSelectedSensorPosition(0) / 1440 * 6 * Math.PI / 12;
     }
     public void resetEncoders() {
         frontleftMotor.setSelectedSensorPosition(0,0,0);

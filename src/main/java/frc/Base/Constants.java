@@ -35,14 +35,18 @@ public class Constants{
     public static final int BACK_RIGHT_TALON_ID = 4;
     public static final int ARM_TALON_ID = 5;
 
-    public static final int DISTANCE_TO_WALL_SENSOR = 1;
+    public static final int LEFT_IR_SENSOR_ID = 1;
+    public static final int RIGHT_IR_SENSOR_ID = 2;
 
     public static final int UP_CLIMBER_VICTOR_ID = 1;
     public static final int FORWARD_CLIMBER_VICTOR_ID = 2;
+
+    public static final int VACUUM_SPARK_ID = 1;
 
     //Tolerances
     public static final int FORWARD_TOLERANCE = 1;
     public static final int TURN_TOLERANCE = 1;
     public static final int ACTUATION_TOLERANCE = 1;
+    public static final int CLIMB_TOLERANCE = 1;
 
 }

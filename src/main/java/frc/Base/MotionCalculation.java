@@ -7,20 +7,18 @@ public class MotionCalculation {
 
     private static boolean finished = false;
 
-    public static double normalize(double target, double reading, double value) {
+    public static double normalize(double target, double reading) {
         /*
         * the value is the error
         * the minimum value is the reading
         * the max value is the target
         */
-        normalizedValue = ((value - reading) / (target - reading));
+        error = target - reading;
+        normalizedValue = ((error - reading) / (target - reading));
         return normalizedValue;
     }
 
-    public static double getRate(double target, double reading) {
-        error = target - reading;
-        return error;
-    }
+    public static double getError() { return error;}
 
     public static boolean isFinished(double tolerance) {
         finished = (error <= Math.abs(tolerance));

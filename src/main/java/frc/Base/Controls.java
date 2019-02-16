@@ -70,4 +70,5 @@ public class Controls{
     public static boolean setArmLevel3() { return systemJoy.getRawButton(level3Button);}
     public static boolean suction() { return systemJoy.getRawButton(suctionButton);}
     public static boolean climb() { return systemJoy.getRawButton(climbButton);}
+    public static double getPOV() { return systemJoy.getPOV();}
 }

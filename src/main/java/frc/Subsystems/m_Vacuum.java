@@ -2,23 +2,30 @@ package frc.Subsystems;
 
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
+import frc.Base.Constants;
+import frc.Base.MotionCalculation;
+import frc.robot.Robot;
 
 public class m_Vacuum {
-	private Servo armHead;
 	private Spark pump;
 
-	private int servochannel = 7;
-	private int pumpchannel = 7;
-	double groundangle = 10;
 
 	public m_Vacuum() {
-		armHead = new Servo(servochannel);
-		pump = new Spark(pumpchannel);
+		pump = new Spark(Constants.VACUUM_SPARK_ID);
 	}
-	public void setSuccageSpeed(double succspeed) {
+
+	private void setSuccageSpeed(double succspeed) {
 		pump.set(succspeed);
 	}
-	public void setHeadAngle(double angle) {
-		armHead.set(angle);
+
+	public void update() {
+		switch (Robot.i_vacuum.getFSMState()) {
+			case "EXTENDING":
+				setSuccageSpeed(Constants.SPARK_SUCTION_SPEED);
+				break;
+			case "NOT EXTENDING":
+				setSuccageSpeed(0);
+				break;
+		}
 	}
 }
