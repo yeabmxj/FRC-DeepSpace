@@ -7,8 +7,6 @@ import frc.robot.Robot;
 public class i_Arm extends State {
 
     public void update() {
-        setFSMState("HOME");
-        Robot.m_arm.update();
         System.out.println(INUSE ? "MOVING" : "STOPPED");
 
         setFSMState(INUSE ? getFSMState() :
@@ -22,5 +20,6 @@ public class i_Arm extends State {
                 Controls.setArmLevel2() ? "LEVEL 2" :
                 Controls.setArmLevel3() ? "LEVEL 3" :
                 Controls.home() ? "HOME" : "STOP"));
-             }
+        Robot.m_arm.update();
+    }
 }

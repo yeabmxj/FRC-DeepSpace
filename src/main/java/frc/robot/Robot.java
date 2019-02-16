@@ -54,18 +54,24 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         Operator.update();
     }
-    public void autonomousInit() { }
+    public void autonomousInit() {
+        Robot.m_drivetrain.resetEncoders(); }
     public void autonomousPeriodic() {
-        Robot.m_drivetrain.TankLeft(MotionCalculation.normalize(10, Robot.m_drivetrain.getEncodervalues()));
-		Robot.m_drivetrain.TankRight(MotionCalculation.normalize(10, Robot.m_drivetrain.getEncodervalues()));
+        MotionCalculation.setSystem("Auto");
+        if (MotionCalculation.isFinished()) {
+		    Robot.m_drivetrain.TankLeft(0);
+            Robot.m_drivetrain.TankRight(0);
+        } else {
+            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
+            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+        }
     }
 
     public void teleopInit() {
-        i_drivetrain.update();
-        i_arm.update();
+        eNavx.resetGyro();
     }
     public void teleopPeriodic() {
-        i_drivetrain.update();
-        i_arm.update();
+        Robot.m_arm.setSpeed(-.5);
     }
 }

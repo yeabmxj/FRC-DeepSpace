@@ -1,11 +1,11 @@
-package frc.External;
+package frc.Base;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class e_LimeLightVision {
+public class LimeLightVision {
     public NetworkTableEntry tx;
     public NetworkTableEntry ty;
     public NetworkTableEntry ta;
@@ -15,7 +15,7 @@ public class e_LimeLightVision {
     double y = 0;
     double area = 0;
     
-    public e_LimeLightVision() {
+    public LimeLightVision() {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         tx = table.getEntry("tx");
         ty = table.getEntry("ty");

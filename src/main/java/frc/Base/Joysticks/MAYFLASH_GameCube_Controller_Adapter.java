@@ -11,11 +11,8 @@ public class MAYFLASH_GameCube_Controller_Adapter extends Controls {
 
         ThrottleType = "Button Based";
 
-        increaseThrottleButton = 1;
-        decreaseThrottleButton = 2;
-        increaseThrottleAxis = 1;
-        decreaseThrottleAxis = 2;
-        oneAxisThrottleAxis = 3;
+        increaseThrottleButton = 7;
+        decreaseThrottleButton = 8;
     }
     public static void SystemJOY() {
         homeButton = 1;
@@ -26,7 +23,8 @@ public class MAYFLASH_GameCube_Controller_Adapter extends Controls {
         climbButton = 6;
         autonomousButton = 7;
     }
-    public static void OmniJOY() {xAxis = 1;
+    public static void OmniJOY() {
+        xAxis = 1;
         yAxis = 4;
         zAxis = 1;
         axisDirection = -1;

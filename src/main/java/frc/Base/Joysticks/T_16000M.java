@@ -4,8 +4,8 @@ import frc.Base.Controls;
 
 public class T_16000M extends Controls {
     public static void DriveJOY() {
-        xAxis = 1;
-        yAxis = 4;
+        xAxis = 0;
+        yAxis = 1;
         zAxis = 1;
         axisDirection = -1;
 

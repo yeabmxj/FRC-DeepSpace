@@ -26,9 +26,9 @@ public class m_Climber {
             case "EXTENDING":
                 Robot.i_climber.INUSE = true;
                 setRise_and_Reach(
-                        MotionCalculation.normalize(Constants.CLIMB_UP_HEIGHT, Robot.m_climber.getRise()),
-                        MotionCalculation.normalize(Constants.CLIMB_FORWARD_HEIGHT, Robot.m_climber.getReach()));
-                if(MotionCalculation.isFinished(Constants.CLIMB_TOLERANCE)) {
+                        MotionCalculation.normalize(Constants.CLIMB_UP_HEIGHT,.5, Robot.m_climber.getRise(), 1),
+                        MotionCalculation.normalize(Constants.CLIMB_FORWARD_HEIGHT,.5, Robot.m_climber.getReach(), 1));
+                if(MotionCalculation.isFinished()) {
                     Robot.i_climber.INUSE = false;
                 }
                 break;
