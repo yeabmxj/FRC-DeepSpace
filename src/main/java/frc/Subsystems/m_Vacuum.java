@@ -1,6 +1,5 @@
 package frc.Subsystems;
 
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
 import frc.Base.Constants;
 import frc.Base.MotionCalculation;
@@ -20,10 +19,10 @@ public class m_Vacuum {
 
 	public void update() {
 		switch (Robot.i_vacuum.getFSMState()) {
-			case "EXTENDING":
+			case "SUCTION ON":
 				setSuccageSpeed(Constants.SPARK_SUCTION_SPEED);
 				break;
-			case "NOT EXTENDING":
+			case "SUCTION OFF":
 				setSuccageSpeed(0);
 				break;
 		}

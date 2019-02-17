@@ -1,16 +1,13 @@
 package frc.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-
-import edu.wpi.first.wpilibj.AnalogInput;
-
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.Base.Constants;
 import frc.Base.Controls;
-import frc.StateMachines.*;
-import frc.robot.*;
-
+import frc.StateMachines.i_Drivetrain;
+import frc.robot.Robot;
+import edu.wpi.first.wpilibj.AnalogInput;
 public class m_Drivetrain {
 
     public TalonSRX frontleftMotor;
@@ -18,7 +15,7 @@ public class m_Drivetrain {
     public TalonSRX backleftMotor; 
     public TalonSRX backrightMotor;
 
-    public AnalogInput distanceToWallSensor;
+    public AnalogInput
 
     public m_Drivetrain() {
         frontleftMotor = new TalonSRX(Constants.FRONT_LEFT_TALON_ID);

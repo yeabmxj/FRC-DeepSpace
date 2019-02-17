@@ -14,6 +14,8 @@ public class m_Arm extends State {
 
     private double target;
 
+    private int direction;
+
     public m_Arm() {
         DART = new TalonSRX(Constants.ARM_TALON_ID);
     }
@@ -32,7 +34,7 @@ public class m_Arm extends State {
 
                 MotionCalculation.setSystem("Arm");
                 setTarget();
-                int direction = Double.compare(target, Robot.eNavx.getRoll());
+                direction = Double.compare(target, Robot.eNavx.getRoll());
 
                 System.out.println(Robot.i_arm.getMessage() + " " + target + " " + Robot.eNavx.getRoll());
                 setSpeed(direction * .5 * MotionCalculation.normalize(target,0, Robot.eNavx.getRoll(), 5));
