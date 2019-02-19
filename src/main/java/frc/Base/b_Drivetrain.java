@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 import frc.robot.Robot;
 
-public class DLibrary{
+public class b_Drivetrain {
 
     private String DriveTrainType = "";
     

@@ -43,4 +43,8 @@ public class Constants{
 
     public static final int VACUUM_SPARK_ID = 1;
 
+    //Auto
+    public static final double FRONT_TO_SMALL_ELLIPSE_ENCODER = 10;
+    public static final double FRONT_TO_BIG_ELLIPSE_ENCODER = 10;
+    public static final double VOLTAGE_TO_FEET_FACTOR = 1;
 }

@@ -1,17 +1,16 @@
 package frc.StateMachines;
 
-import frc.Base.State;
 import frc.robot.Robot;
 
-public class i_Drivetrain extends State {
+public class i_Drivetrain extends frc.Base.Input {
 
 
     public static final int Input = 0;
 
     public void update() {
             setFSMState(
-                    Robot.dLibrary.getDriveTrainType().equals("Mecanum") ? "Mecanum" :
-                    Robot.dLibrary.getDriveTrainType().equals("Tank") ? "Tank" : "Input");
+                    Robot.b_drivetrain.getDriveTrainType().equals("Mecanum") ? "Mecanum" :
+                    Robot.b_drivetrain.getDriveTrainType().equals("Tank") ? "Tank" : "Input");
             Robot.m_drivetrain.update();
     }
 }

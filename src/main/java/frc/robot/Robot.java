@@ -7,14 +7,16 @@ import frc.External.e_Navx;
 import frc.StateMachines.*;
 import frc.Subsystems.*;
 import frc.auto.i_Auto;
+import frc.auto.m_Auto;
 
 public class Robot extends TimedRobot {
-    public static e_Navx eNavx;
-    public static e_LimeLightVision eLimeLightVision;
+    public static e_Navx e_navx;
+    public static e_LimeLightVision e_limeLightVision;
 
-    public static DLibrary dLibrary;
+    public static b_Drivetrain b_drivetrain;
 
     public static m_Drivetrain m_drivetrain;
+    public static m_Auto m_auto;
     public static m_Arm m_arm;
     public static m_Climber m_climber;
     public static m_Vacuum m_vacuum;
@@ -28,12 +30,13 @@ public class Robot extends TimedRobot {
     public static i_Wrist i_wrist;
 
     public void robotInit() {
-        eNavx = new e_Navx();
+        e_navx = new e_Navx();
+        e_limeLightVision = new e_LimeLightVision();
 
-        dLibrary = new DLibrary();
+        b_drivetrain = new b_Drivetrain();
 
         m_drivetrain = new m_Drivetrain();
-        eLimeLightVision = new e_LimeLightVision();
+        m_auto = new m_Auto();
         m_arm = new m_Arm();
         m_climber = new m_Climber();
         m_vacuum = new m_Vacuum();
@@ -46,9 +49,9 @@ public class Robot extends TimedRobot {
         i_vacuum = new i_Vacuum();
         i_wrist = new i_Wrist();
 
-        dLibrary.setDriveTrainType("Tank");
+        b_drivetrain.setDriveTrainType("Tank");
         m_drivetrain.resetEncoders();
-        eNavx.resetGyro();
+        e_navx.resetGyro();
         Operator.update();
     }
     public void robotPeriodic() {
@@ -57,19 +60,20 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Robot.m_drivetrain.resetEncoders(); }
     public void autonomousPeriodic() {
-        MotionCalculation.setSystem("Auto");
-        if (MotionCalculation.isFinished()) {
-		    Robot.m_drivetrain.TankLeft(0);
-            Robot.m_drivetrain.TankRight(0);
-        } else {
-            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
-            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-        }
+        i_auto.update();
+//        MotionCalculation.setSystem("Auto");
+//        if (MotionCalculation.isFinished()) {
+//		    Robot.m_drivetrain.TankLeft(0);
+//            Robot.m_drivetrain.TankRight(0);
+//        } else {
+//            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
+//            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+//            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+//        }
     }
 
     public void teleopInit() {
-        eNavx.resetGyro();
+        e_navx.resetGyro();
     }
     public void teleopPeriodic() {
         Robot.m_arm.setSpeed(-.5);

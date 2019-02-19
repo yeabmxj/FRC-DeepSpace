@@ -16,6 +16,7 @@ public class m_Wrist {
     private static double[] Speeds;
     private static int xdirection;
     private static int ydirection;
+    private static int flip;
 
     public m_Wrist() {
         xTranslation = new VictorSPX(Constants.WRIST_X_MOVER);
@@ -43,6 +44,8 @@ public class m_Wrist {
                          xSign.equals("-") ? -1 : 0;
             ydirection = ySign.equals("+") ? 1 :
                          ySign.equals("-") ? -1 : 0;
+            Speeds[0] = Speeds[0] == 5 ? Speeds[0] / 10 : Speeds[0];
+            Speeds[1] = Speeds[1] == 5 ? Speeds[1] / 10 : Speeds[1];
         }
         else {
             Speeds[0] = 0;
@@ -53,7 +56,8 @@ public class m_Wrist {
         switch (Robot.i_wrist.getFSMState()) {
             case "MOVING":
                 updateSpeed();
-                setxTranslation(xdirection * Speeds[0]);
+                flip = !getLeft() && !getRight() ? 1 : -1;
+                setxTranslation(flip * xdirection * Speeds[0]);
                 setyTranslation(ydirection * Speeds[1]);
                 break;
             case "STOPPED":

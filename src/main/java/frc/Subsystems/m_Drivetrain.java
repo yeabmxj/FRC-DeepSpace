@@ -15,7 +15,8 @@ public class m_Drivetrain {
     public TalonSRX backleftMotor; 
     public TalonSRX backrightMotor;
 
-    public AnalogInput
+    public AnalogInput leftIRSensor;
+    public AnalogInput rightIRSensor;
 
     public m_Drivetrain() {
         frontleftMotor = new TalonSRX(Constants.FRONT_LEFT_TALON_ID);
@@ -23,8 +24,9 @@ public class m_Drivetrain {
         backleftMotor = new TalonSRX(Constants.BACK_LEFT_TALON_ID);
         backrightMotor = new TalonSRX(Constants.BACK_RIGHT_TALON_ID);
 
-        distanceToWallSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
-        
+        leftIRSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
+        rightIRSensor = new AnalogInput(Constants.RIGHT_IR_SENSOR_ID);
+
         frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
@@ -32,10 +34,10 @@ public class m_Drivetrain {
 
     }
     public void MecanumDrive(double yaxis, double xaxis, double zaxis, double gyroangle, double throttle) {
-        yaxis = Robot.dLibrary.applyDeadband(Robot.dLibrary.limit(yaxis));
-        xaxis = Robot.dLibrary.applyDeadband(Robot.dLibrary.limit(xaxis));
+        yaxis = Robot.b_drivetrain.applyDeadband(Robot.b_drivetrain.limit(yaxis));
+        xaxis = Robot.b_drivetrain.applyDeadband(Robot.b_drivetrain.limit(xaxis));
 
-        double[] processed = Robot.dLibrary.rotate(xaxis, yaxis, gyroangle);
+        double[] processed = Robot.b_drivetrain.rotate(xaxis, yaxis, gyroangle);
 
         double[] wheelSpeeds = new double[5];
         wheelSpeeds[Constants.FRONT_LEFT_TALON_ID] = processed[0] + processed[1] + zaxis;
@@ -43,7 +45,7 @@ public class m_Drivetrain {
         wheelSpeeds[Constants.BACK_LEFT_TALON_ID] = processed[0] + processed[1] + zaxis;
         wheelSpeeds[Constants.BACK_RIGHT_TALON_ID] = processed[0] + processed[1] - zaxis;
 
-        Robot.dLibrary.normalizeMecanum(wheelSpeeds);
+        Robot.b_drivetrain.normalizeMecanum(wheelSpeeds);
 
         frontleftMotor.set(ControlMode.PercentOutput, (wheelSpeeds[Constants.FRONT_LEFT_TALON_ID]) * throttle);
         frontrightMotor.set(ControlMode.PercentOutput, ((wheelSpeeds[Constants.FRONT_RIGHT_TALON_ID]) * throttle) * -1);
@@ -68,10 +70,10 @@ public class m_Drivetrain {
         backrightMotor.set(ControlMode.PercentOutput, speed);
     }
     public double getDistanceToWall() {
-        return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.eLimeLightVision.getContourInfo("ty"));
+        return (Constants.HEIGHT_TO_TAPE - Constants.HEIGHT_TO_CAMERA) / Math.tan(Constants.CAMERA_ANGLE + Robot.e_limeLightVision.getContourInfo("ty"));
     }
-    public double getVoltage() {
-        return distanceToWallSensor.getVoltage();
+    public double Voltage_to_Feet(double voltage) {
+    	return voltage / Constants.VOLTAGE_TO_FEET_FACTOR;
     }
     public double getEncodervalues() {
         return frontrightMotor.getSelectedSensorPosition(0) / 1440 * 6 * Math.PI / 12;
@@ -94,23 +96,13 @@ public class m_Drivetrain {
                 Robot.i_drivetrain.setState(i_Drivetrain.Input);
                 break;
             case "Mecanum":
-                Robot.m_drivetrain.MecanumDrive(Controls.getY(), Controls.getX(), Controls.getZ(), Robot.eNavx.getYaw(), .5);
+                Robot.m_drivetrain.MecanumDrive(Controls.getAxis(Controls.yAxis), Controls.getAxis(Controls.xAxis), Controls.getAxis(Controls.zAxis), Robot.e_navx.getYaw(), .5);
                 break;
             case "Tank":
-                Robot.m_drivetrain.TankDrive(Controls.getY(), Controls.getX(), .5);
+                Robot.m_drivetrain.TankDrive(Controls.getAxis(Controls.yAxis), Controls.getAxis(Controls.xAxis), Controls.getT());
                 break;
             case "Stop":
                 StopMotors();
-                break;
-        }
-    }
-    public void updateAuto() {
-        switch (Robot.i_auto.getFSMState()) {
-            case "":
-                Robot.i_auto.update();
-                break;
-            case "Manual":
-                Robot.i_drivetrain.update();
                 break;
         }
     }

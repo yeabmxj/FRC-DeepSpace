@@ -3,12 +3,11 @@ package frc.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.Base.Constants;
-import frc.Base.Controls;
 import frc.Base.MotionCalculation;
-import frc.Base.State;
+import frc.Base.Input;
 import frc.robot.Robot;
 
-public class m_Arm extends State {
+public class m_Arm extends Input {
 
     private TalonSRX DART;
 
@@ -34,10 +33,10 @@ public class m_Arm extends State {
 
                 MotionCalculation.setSystem("Arm");
                 setTarget();
-                direction = Double.compare(target, Robot.eNavx.getRoll());
+                direction = Double.compare(target, Robot.e_navx.getRoll());
 
-                System.out.println(Robot.i_arm.getMessage() + " " + target + " " + Robot.eNavx.getRoll());
-                setSpeed(direction * .5 * MotionCalculation.normalize(target,0, Robot.eNavx.getRoll(), 5));
+                System.out.println(Robot.i_arm.getMessage() + " " + target + " " + Robot.e_navx.getRoll());
+                setSpeed(direction * .5 * MotionCalculation.normalize(target,0, Robot.e_navx.getRoll(), 5));
                 if (MotionCalculation.isFinished()) { setSpeed(0);}
                 Robot.i_arm.INUSE = false;
                 break;

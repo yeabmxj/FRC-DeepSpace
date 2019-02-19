@@ -1,10 +1,10 @@
 package frc.StateMachines;
 
 import frc.Base.Controls;
-import frc.Base.State;
+import frc.Base.Input;
 import frc.robot.Robot;
 
-public class i_Wrist extends State {
+public class i_Wrist extends Input {
 
 	public void update() {
 		setFSMState("ORIGIN");

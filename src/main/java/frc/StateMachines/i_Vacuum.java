@@ -1,11 +1,10 @@
 package frc.StateMachines;
 
-import frc.Base.Constants;
 import frc.Base.Controls;
-import frc.Base.State;
+import frc.Base.Input;
 import frc.robot.Robot;
 
-public class i_Vacuum extends State {
+public class i_Vacuum extends Input {
 
     public void update() {
         setFSMState("SUCTION OFF");
@@ -14,6 +13,6 @@ public class i_Vacuum extends State {
         System.out.println(INUSE ? "SUCTION ON" : "SUCTION OFF");
 
         setFSMState(INUSE ? getFSMState() :
-                Controls.suction() ? "SUCTION ON" : "SUCTION OFF");
+                Controls.getButton(Controls.suctionButton) ? "SUCTION ON" : "SUCTION OFF");
         }
     }

@@ -1,15 +1,14 @@
 package frc.StateMachines;
 
-import edu.wpi.first.wpilibj.Timer;
 import frc.Base.Controls;
-import frc.Base.State;
+import frc.Base.Input;
 import frc.robot.Robot;
 
-public class i_Climber extends State {
+public class i_Climber extends Input {
 
     public void update() {
         setFSMState("NOT EXTENDING");
         Robot.m_climber.update();
-        setFSMState(Controls.climb() ? "EXTENDING" : "NOT EXTENDING");
+        setFSMState(Controls.getButton(Controls.climbButton) ? "EXTENDING" : "NOT EXTENDING");
     }
 }
