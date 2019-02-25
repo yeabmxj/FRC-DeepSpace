@@ -92,9 +92,6 @@ public class m_Drivetrain {
     }
     public void update() {
         switch (Robot.i_drivetrain.getFSMState()){
-            case "Input":
-                Robot.i_drivetrain.setState(i_Drivetrain.Input);
-                break;
             case "Mecanum":
                 Robot.m_drivetrain.MecanumDrive(Controls.getAxis(Controls.yAxis), Controls.getAxis(Controls.xAxis), Controls.getAxis(Controls.zAxis), Robot.e_navx.getYaw(), .5);
                 break;

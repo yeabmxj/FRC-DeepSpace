@@ -9,12 +9,13 @@ public class Constants{
     public static final double DEAD_BAND = .02;
     public static final double INITIAL_THROTTLE = .5;
 
-    public static final double CLIMB_UP_HEIGHT = 10;
-    public static final double CLIMB_FORWARD_HEIGHT = 10;
+    public static final double RISE_CLIMBER_SPEED = .75;
+    public static final double RUN_CLIMBER_SPEED = .7;
 
     //Vacuum
     public static final double SPARK_SUCTION_SPEED = .75;
 
+    //Arm
     public static final double ARM_SPEED_MULTIPLIER = .3;
 
     public static final double HOME_HEIGHT = -20;
@@ -42,6 +43,7 @@ public class Constants{
     public static final int FORWARD_CLIMBER_VICTOR_ID = 2;
 
     public static final int VACUUM_SPARK_ID = 1;
+    public static final int SOLENOID_CONTROL_RELAY_ID = 0;
 
     //Auto
     public static final double FRONT_TO_SMALL_ELLIPSE_ENCODER = 10;

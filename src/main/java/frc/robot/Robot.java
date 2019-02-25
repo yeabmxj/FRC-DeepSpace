@@ -60,22 +60,20 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Robot.m_drivetrain.resetEncoders(); }
     public void autonomousPeriodic() {
-        i_auto.update();
-//        MotionCalculation.setSystem("Auto");
-//        if (MotionCalculation.isFinished()) {
-//		    Robot.m_drivetrain.TankLeft(0);
-//            Robot.m_drivetrain.TankRight(0);
-//        } else {
-//            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
-//            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-//            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-//        }
+        //i_auto.update();
+        MotionCalculation.setSystem("Auto");
+        if (!MotionCalculation.isFinished()) {
+            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
+            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(8,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+        }
+        else {
+            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
+        }
     }
-
     public void teleopInit() {
         e_navx.resetGyro();
     }
-    public void teleopPeriodic() {
-        Robot.m_arm.setSpeed(-.5);
-    }
+    public void teleopPeriodic() { }
 }
