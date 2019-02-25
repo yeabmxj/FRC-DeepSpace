@@ -65,11 +65,19 @@ public class Robot extends TimedRobot {
         if (!MotionCalculation.isFinished()) {
             System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
             Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+<<<<<<< HEAD
             Robot.m_drivetrain.TankRight((MotionCalculation.normalize(8,1, Robot.m_drivetrain.getEncodervalues(), 1)));
         }
         else {
             Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
             Robot.m_drivetrain.TankRight((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
+=======
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+        }
+        else {
+            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(45,5, Robot.e_navx.getYaw(), 1)));
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(45,5, Robot.e_navx.getYaw(), 1)));
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         }
     }
     public void teleopInit() {

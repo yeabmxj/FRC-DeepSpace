@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="880e5d79-03d6-44ff-9ce4-56db7cf4cb3b" name="Default Changelist" comment="">
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/modules/DeepSpace.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/DeepSpace.main.iml" afterDir="false" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Base/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Base/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Base/Controls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Base/Controls.java" afterDir="false" />
@@ -12,12 +16,18 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/MAYFLASH_GameCube_Controller_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/MAYFLASH_GameCube_Controller_Adapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/T_16000M.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/T_16000M.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Drivetrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Drivetrain.java" afterDir="false" />
+=======
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Climber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Climber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Vacuum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Vacuum.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java" afterDir="false" />
+=======
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -39,11 +49,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Climber.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="165">
               <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="75">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
             </state>
           </provider>
         </entry>
@@ -51,8 +66,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Vacuum.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="22">
               <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+=======
+            <state relative-caret-position="322">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,33 +102,85 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Climber.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="322">
               <caret line="28" column="90" selection-start-line="28" selection-start-column="90" selection-end-line="28" selection-end-column="90" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/MAYFLASH_GameCube_Controller_Adapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="31" selection-start-line="31" selection-end-line="43" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="91" selection-start-line="89" selection-end-line="91" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
               <caret line="34" selection-start-line="34" selection-end-line="45" selection-end-column="25" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Robot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="64" selection-start-line="64" selection-end-line="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2413#2414#0" expanded="true" />
+                <element signature="e#2447#2448#0" expanded="true" />
+              </folding>
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Drivetrain.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="93" selection-start-line="9" selection-start-column="93" selection-end-line="9" selection-end-column="93" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/auto/m_Auto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="47" selection-start-line="22" selection-start-column="88" selection-end-line="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/b_Drivetrain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="457">
@@ -139,6 +211,17 @@
                 <element signature="e#2413#2414#0" expanded="true" />
                 <element signature="e#2447#2448#0" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/T_16000M.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Controls.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
             </state>
           </provider>
         </entry>
@@ -165,6 +248,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/build.gradle" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         <option value="$PROJECT_DIR$/src/main/java/frc/Base/Input.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/auto/m_Auto.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/InputLoop.java" />
@@ -172,6 +259,7 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/auto/i_Auto.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Climber.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Vacuum.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/Base/Controls.java" />
@@ -187,6 +275,20 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Drivetrain.java" />
+=======
+        <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Controls.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/Controller_Gamepad_F310.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/Controller_Xbox_One_For_Windows.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/Logitech_Extreme_3D.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/Logitech_RumblePad_2_USB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/MAYFLASH_GameCube_Controller_Adapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/T_16000M.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Vacuum.java" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" />
       </list>
     </option>
@@ -309,7 +411,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551132941525" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550615849117" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -345,7 +451,11 @@
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27134877" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27134877" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -446,6 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/InputLoop.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Input.java">
+<<<<<<< HEAD
+=======
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
@@ -481,9 +593,45 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Main.java">
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Drivetrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Climber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/External/e_Navx.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Climber.java">
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -504,6 +652,37 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Wrist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/auto/i_Auto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Operator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/auto/i_Auto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -516,11 +695,26 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.wpilibj/wpilibj-java/2019.3.1/833de3f0c566a45afc1cdc74f037040f7f362f0/wpilibj-java-2019.3.1-sources.jar!/edu/wpi/first/wpilibj/Relay.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state>
           <caret selection-end-line="29" selection-end-column="13" />
         </state>
       </provider>
     </entry>
+=======
+        <state relative-caret-position="405">
+          <caret line="34" selection-start-line="34" selection-end-line="45" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/edu.wpi.first.wpilibj/wpilibj-java/2019.3.1/833de3f0c566a45afc1cdc74f037040f7f362f0/wpilibj-java-2019.3.1-sources.jar!/edu/wpi/first/wpilibj/Relay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Controls.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -563,6 +757,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="28" selection-start-line="28" selection-end-line="28" />
+<<<<<<< HEAD
         </state>
       </provider>
     </entry>
@@ -570,11 +765,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="28" selection-start-line="28" selection-end-line="28" />
+=======
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Base/Joysticks/Controller_Gamepad_F310.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="75">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
@@ -587,19 +785,24 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="187">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Climber.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Vacuum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+        <state relative-caret-position="322">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Climber.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -611,6 +814,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="457">
           <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/StateMachines/i_Arm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         </state>
       </provider>
     </entry>
@@ -624,6 +833,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Wrist.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -635,12 +845,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Drivetrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="91" selection-start-line="89" selection-end-line="91" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/auto/m_Auto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="47" selection-start-line="22" selection-start-column="88" selection-end-line="47" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/Subsystems/m_Arm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -669,6 +896,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="83">
           <caret line="52" column="16" lean-forward="true" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Robot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+>>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2413#2414#0" expanded="true" />
