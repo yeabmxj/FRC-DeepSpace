@@ -10,16 +10,12 @@ public class i_Arm extends Input {
         System.out.println(INUSE ? "MOVING" : "STOPPED");
 
         setFSMState(INUSE ? getFSMState() :
-                Controls.getButton(Controls.homeButton) ||
-                Controls.getButton(Controls.level1Button) ||
-                Controls.getButton(Controls.level2Button) ||
-                Controls.getButton(Controls.level3Button) ? "MOVING" : "STOPPED");
+                Controls.getButton(Controls.levelUpButton) ||
+                Controls.getButton(Controls.levelDownButton) ? "MOVING" : "STOPPED");
 
         setMessage(INUSE ? getFSMState() : (
-                Controls.getButton(Controls.homeButton) ? "HOME" :
-                Controls.getButton(Controls.level1Button) ? "LEVEL 1" :
-                Controls.getButton(Controls.level2Button) ? "LEVEL 2" :
-                Controls.getButton(Controls.level3Button) ? "LEVEL 3" : "STOP"));
+                Controls.getButton(Controls.levelUpButton) ? "LEVEL UP" :
+                        Controls.getButton(Controls.levelDownButton) ? "LEVEL DOWN" : "STOP"));
         Robot.m_arm.update();
     }
 }

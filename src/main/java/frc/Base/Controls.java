@@ -20,12 +20,11 @@ public class Controls{
 
     //Secondary Joystick
     public static int autonomousButton;
-    public static int level1Button;
-    public static int level2Button;
-    public static int level3Button;
-    public static int homeButton;
+    public static int levelUpButton;
+    public static int levelDownButton;
     public static int suctionButton;
     public static int climbButton;
+    public static int solonoidButton;
 
     private static double throttle = Constants.INITIAL_THROTTLE;
 

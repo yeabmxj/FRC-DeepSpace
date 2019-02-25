@@ -42,6 +42,7 @@ public class Constants{
     public static final int FORWARD_CLIMBER_VICTOR_ID = 2;
 
     public static final int VACUUM_SPARK_ID = 1;
+    public static final int SOLONOID_CONTROL_RELAY_ID = 0;
 
     //Auto
     public static final double FRONT_TO_SMALL_ELLIPSE_ENCODER = 10;

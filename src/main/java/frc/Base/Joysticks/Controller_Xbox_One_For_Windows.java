@@ -18,13 +18,12 @@ public class Controller_Xbox_One_For_Windows extends Controls {
         oneAxisThrottleAxis = 3;
     }
     public static void SystemJOY() {
-        homeButton = 1;
-        level1Button = 2;
-        level2Button = 3;
-        level3Button = 4;
+        levelUpButton = 2;
+        levelDownButton = 3;
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
+        solonoidButton = 8;
     }
     public static void OmniJOY() {xAxis = 1;
         yAxis = 4;
@@ -39,12 +38,11 @@ public class Controller_Xbox_One_For_Windows extends Controls {
         decreaseThrottleAxis = 2;
         oneAxisThrottleAxis = 3;
 
-        homeButton = 1;
-        level1Button = 2;
-        level2Button = 3;
-        level3Button = 4;
+        levelUpButton = 2;
+        levelDownButton = 3;
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
+        solonoidButton = 8;
     }
 }
