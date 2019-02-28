@@ -15,8 +15,7 @@ public class m_Drivetrain {
     public TalonSRX backleftMotor; 
     public TalonSRX backrightMotor;
 
-    public AnalogInput leftIRSensor;
-    public AnalogInput rightIRSensor;
+//    public AnalogInput leftIRSensor;
 
     public m_Drivetrain() {
         frontleftMotor = new TalonSRX(Constants.FRONT_LEFT_TALON_ID);

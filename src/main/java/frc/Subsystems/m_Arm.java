@@ -20,7 +20,6 @@ public class m_Arm extends Input {
         DART = new TalonSRX(Constants.ARM_TALON_ID);
     }
     public void setSpeed(double speed) { DART.set(ControlMode.PercentOutput, speed);}
-    public double getSpeed() { return DART.getSelectedSensorVelocity(0);}
     public void setTarget() {
         ArmTarget += Robot.i_arm.getMessage().equals("LEVEL UP") ? 1 :
                 Robot.i_arm.getMessage().equals("LEVEL DOWN") ? -1 : 0;
