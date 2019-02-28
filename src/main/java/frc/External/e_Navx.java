@@ -9,6 +9,7 @@ public class e_Navx {
     public e_Navx() {
         navx = new AHRS(SerialPort.Port.kUSB);
     }
+    public boolean getAvailability() { return navx.isConnected();}
     public double getRoll() { return navx.getRoll();}
     public double getPitch() { return  navx.getPitch();}
     public double getYaw() { return navx.getYaw();}

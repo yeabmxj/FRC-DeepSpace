@@ -31,7 +31,7 @@ public class m_Wrist {
     }
     public boolean GetPressed(String side) {
         return side.equals("Left") ? leftXLimit.get() :
-                side.equals("Right") ? rightXLimit.get() : false;
+               side.equals("Right") ? rightXLimit.get() : false;
     }
     public void WristSpeedParse(String message, int speedINDEX, int charINDEX) {
         Speeds[speedINDEX] = message.charAt(charINDEX);
@@ -47,8 +47,8 @@ public class m_Wrist {
                     xSign.equals("-") ? -1 : 0;
             YDirection = ySign.equals("+") ? 1 :
                     ySign.equals("-") ? -1 : 0;
-            Speeds[0] = Speeds[0] == 5 ? Speeds[0] / 10 : Speeds[0];
-            Speeds[1] = Speeds[1] == 5 ? Speeds[1] / 10 : Speeds[1];
+            Speeds[0] = Speeds[0] != 1 ? Speeds[0] / 10 : Speeds[0];
+            Speeds[1] = Speeds[1] != 1 ? Speeds[1] / 10 : Speeds[1];
         } else {
             Speeds[0] = 0;
             Speeds[1] = 0;

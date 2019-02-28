@@ -23,7 +23,7 @@ public class Controller_Gamepad_F310 extends Controls {
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
-        solonoidButton = 8;
+        solenoidButton = 8;
     }
     public static void OmniJOY() {xAxis = 1;
         yAxis = 4;
@@ -43,6 +43,6 @@ public class Controller_Gamepad_F310 extends Controls {
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
-        solonoidButton = 8;
+        solenoidButton = 8;
     }
 }

@@ -24,8 +24,8 @@ public class m_Drivetrain {
         backleftMotor = new TalonSRX(Constants.BACK_LEFT_TALON_ID);
         backrightMotor = new TalonSRX(Constants.BACK_RIGHT_TALON_ID);
 
-        leftIRSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
-        rightIRSensor = new AnalogInput(Constants.RIGHT_IR_SENSOR_ID);
+        //leftIRSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
+        //rightIRSensor = new AnalogInput(Constants.RIGHT_IR_SENSOR_ID);
 
         frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
         frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
@@ -92,11 +92,6 @@ public class m_Drivetrain {
     }
     public void update() {
         switch (Robot.i_drivetrain.getFSMState()){
-<<<<<<< HEAD
-=======
-            case "Input":
-                break;
->>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
             case "Mecanum":
                 Robot.m_drivetrain.MecanumDrive(Controls.getAxis(Controls.yAxis), Controls.getAxis(Controls.xAxis), Controls.getAxis(Controls.zAxis), Robot.e_navx.getYaw(), .5);
                 break;

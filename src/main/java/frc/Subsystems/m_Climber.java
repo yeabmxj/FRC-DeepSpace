@@ -11,7 +11,7 @@ public class m_Climber {
     public VictorSPX climbUp;
     public VictorSPX climbForward;
 
-    private double[] RiseandRun;
+    double[] Rise_and_Run;
 
     public m_Climber() {
         climbUp = new VictorSPX(Constants.UP_CLIMBER_VICTOR_ID);
@@ -25,9 +25,9 @@ public class m_Climber {
         switch (Robot.i_arm.getFSMState()) {
             case "EXTENDING":
                 Robot.i_climber.INUSE = true;
-                RiseandRun[0] = Timer.getFPGATimestamp() < 4 ? Constants.RISE_CLIMBER_SPEED : 0;
-                RiseandRun[1] = Timer.getFPGATimestamp() < 4 ? Constants.RUN_CLIMBER_SPEED : 0;
-                RiseandRun(RiseandRun[0], RiseandRun[1]);
+                Rise_and_Run[0] = Timer.getFPGATimestamp() < 4 ? Constants.RISE_CLIMBER_SPEED : 0;
+                Rise_and_Run[1] = Timer.getFPGATimestamp() < 4 ? Constants.RUN_CLIMBER_SPEED : 0;
+                RiseandRun(Rise_and_Run[0], Rise_and_Run[1]);
                 Robot.i_climber.INUSE = false;
                 break;
             case "NOT EXTENDING":

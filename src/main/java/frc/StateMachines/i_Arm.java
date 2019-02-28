@@ -11,11 +11,12 @@ public class i_Arm extends Input {
 
         setFSMState(INUSE ? getFSMState() :
                 Controls.getButton(Controls.levelUpButton) ||
-                Controls.getButton(Controls.levelDownButton) ? "MOVING" : "STOPPED");
+                Controls.getButton(Controls.levelDownButton) ? "MOVING" :
+                !Robot.e_navx.getAvailability() ?  "MANUAL" : "STOPPED");
 
         setMessage(INUSE ? getFSMState() : (
                 Controls.getButton(Controls.levelUpButton) ? "LEVEL UP" :
-                        Controls.getButton(Controls.levelDownButton) ? "LEVEL DOWN" : "STOP"));
+                Controls.getButton(Controls.levelDownButton) ? "LEVEL DOWN" : "STOPPED"));
         Robot.m_arm.update();
     }
 }

@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
         i_vacuum = new i_Vacuum();
         i_wrist = new i_Wrist();
 
+        Controls.updatePorts();
         b_drivetrain.setDriveTrainType("Tank");
         m_drivetrain.resetEncoders();
         e_navx.resetGyro();
@@ -64,24 +65,24 @@ public class Robot extends TimedRobot {
         MotionCalculation.setSystem("Auto");
         if (!MotionCalculation.isFinished()) {
             System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
-            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-<<<<<<< HEAD
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(8,1, Robot.m_drivetrain.getEncodervalues(), 1)));
+            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(),1)));
+            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(),1)));
         }
         else {
             Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
             Robot.m_drivetrain.TankRight((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
-=======
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(), 1)));
-        }
-        else {
-            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(45,5, Robot.e_navx.getYaw(), 1)));
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(45,5, Robot.e_navx.getYaw(), 1)));
->>>>>>> 5cbcc7a49e6dec5874169351f24881592d694e9b
         }
     }
     public void teleopInit() {
         e_navx.resetGyro();
+        m_drivetrain.resetEncoders();
     }
-    public void teleopPeriodic() { }
+    public void teleopPeriodic() {
+        //i_drivetrain.update();
+    }
+    public void testInit() {
+        i_arm.update();
+        i_wrist.update();
+        i_vacuum.update();
+    }
 }

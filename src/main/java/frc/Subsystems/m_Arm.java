@@ -22,25 +22,32 @@ public class m_Arm extends Input {
     public void setSpeed(double speed) { DART.set(ControlMode.PercentOutput, speed);}
     public double getSpeed() { return DART.getSelectedSensorVelocity(0);}
     public void setTarget() {
-        ArmTarget += Robot.i_arm.getMessage().equals("Level Up") ? 1 :
-                Robot.i_arm.getMessage().equals("Level Down") ? -1 : 0;
+        ArmTarget += Robot.i_arm.getMessage().equals("LEVEL UP") ? 1 :
+                Robot.i_arm.getMessage().equals("LEVEL DOWN") ? -1 : 0;
         target =
                 ArmTarget == 0 ? Constants.HOME_HEIGHT:
                 ArmTarget == 1 ? Constants.LEVEL_1_HEIGHT:
                 ArmTarget == 2 ? Constants.LEVEL_2_HEIGHT:
-                ArmTarget == 3 ? Constants.LEVEL_3_HEIGHT: -1;
+                ArmTarget == 3 ? Constants.LEVEL_3_HEIGHT:
+                ArmTarget > 4 ? Constants.LEVEL_3_HEIGHT :
+                ArmTarget < 0 ? Constants.HOME_HEIGHT : Robot.e_navx.getRoll();
     }
     public void update() {
         switch (Robot.i_arm.getFSMState()) {
             case "MOVING":
                 Robot.i_arm.INUSE = true;
-                ArmTarget += Robot.i_arm.getMessage().equals("Level Up") ? 1 :
-                        Robot.i_arm.getMessage().equals("Level Down") ? -1 : 0;
                 setTarget();
                 MotionCalculation.setSystem("Arm");
                 double direction = Double.compare(target, Robot.e_navx.getRoll());
                 setSpeed(direction * .5 * MotionCalculation.normalize(target,0, Robot.e_navx.getRoll(), 5));
-                INUSE = false;
+                Robot.i_arm.INUSE = false;
+                break;
+            case "MANUAL":
+                Robot.i_arm.INUSE = true;
+                setSpeed(
+                        Robot.i_arm.getMessage().equals("Level Up") ? .5 :
+                        Robot.i_arm.getMessage().equals("Level Down") ? -.5 : 0);
+                Robot.i_arm.INUSE = false;
                 break;
             case "STOPPED":
                 setSpeed(0);

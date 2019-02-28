@@ -20,7 +20,7 @@ public class Logitech_RumblePad_2_USB extends Controls {
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
-        solonoidButton = 8;
+        solenoidButton = 8;
     }
     public static void OmniJOY() {xAxis = 1;
         yAxis = 4;
@@ -40,6 +40,6 @@ public class Logitech_RumblePad_2_USB extends Controls {
         suctionButton = 5;
         climbButton = 6;
         autonomousButton = 7;
-        solonoidButton = 8;
+        solenoidButton = 8;
     }
 }
