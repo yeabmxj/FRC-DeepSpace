@@ -10,8 +10,6 @@ public class i_Vacuum extends Input {
         setFSMState("SUCTION OFF");
         Robot.m_vacuum.update();
 
-        System.out.println(INUSE ? "SUCTION ON" : "SUCTION OFF");
-
         setFSMState(INUSE ? getFSMState() :
                 Controls.getButton(Controls.suctionButton) ? "SUCTION ON" : "SUCTION OFF");
         }

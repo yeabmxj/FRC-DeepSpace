@@ -9,8 +9,8 @@ public class Controls{
     private static int secondaryPort;
     private static int i;
 
-    static Joystick mainJoystick = new Joystick(mainPort);
-    static Joystick secondaryJoystick = new Joystick(secondaryPort);
+    public static Joystick mainJoystick = new Joystick(mainPort);
+    public static Joystick secondaryJoystick = new Joystick(secondaryPort);
 
     //Main Joystick
     public static int xAxis;

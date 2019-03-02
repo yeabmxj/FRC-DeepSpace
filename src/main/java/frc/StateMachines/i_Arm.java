@@ -7,16 +7,14 @@ import frc.robot.Robot;
 public class i_Arm extends Input {
 
     public void update() {
-        System.out.println(INUSE ? "MOVING" : "STOPPED");
-
         setFSMState(INUSE ? getFSMState() :
                 Controls.getButton(Controls.levelUpButton) ||
-                Controls.getButton(Controls.levelDownButton) ? "MOVING" :
-                !Robot.e_navx.getAvailability() ?  "MANUAL" : "STOPPED");
+                        Controls.getButton(Controls.levelDownButton) ? "MANUAL" :
+                        !Robot.e_navx.getAvailability() ?  "MANUAL" : "STOPPED");
 
         setMessage(INUSE ? getFSMState() : (
                 Controls.getButton(Controls.levelUpButton) ? "LEVEL UP" :
-                Controls.getButton(Controls.levelDownButton) ? "LEVEL DOWN" : "STOPPED"));
+                        Controls.getButton(Controls.levelDownButton) ? "LEVEL DOWN" : "STOPPED"));
         Robot.m_arm.update();
     }
 }

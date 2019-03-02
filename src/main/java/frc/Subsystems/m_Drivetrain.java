@@ -83,7 +83,7 @@ public class m_Drivetrain {
         backleftMotor.setSelectedSensorPosition(0,0,0);
         backrightMotor.setSelectedSensorPosition(0,0,0);
     }
-    public void StopMotors() {
+    private void StopMotors() {
         frontrightMotor.set(ControlMode.PercentOutput, 0);
         frontleftMotor.set(ControlMode.PercentOutput, 0);
         backrightMotor.set(ControlMode.PercentOutput, 0);

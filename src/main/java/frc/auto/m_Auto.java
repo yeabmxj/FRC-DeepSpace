@@ -40,20 +40,20 @@ public class m_Auto extends m_Drivetrain {
 						TankLeft(MotionCalculation.normalize(90, 0, Robot.e_navx.getPitch(), 5));
 						TankRight(MotionCalculation.normalize(90, 0, Robot.e_navx.getPitch(), 5));
 						if (MotionCalculation.isFinished()) {
-							double DistanceToWall = Voltage_to_Feet((leftIRSensor.getVoltage() + rightIRSensor.getVoltage()) / 2);
-
-							double SDistance = ellipticalDriveDistance(AngleAtTarget, DistanceToWall, Voltage_to_Feet(Constants.FRONT_TO_SMALL_ELLIPSE_ENCODER));
-							double LDistance = ellipticalDriveDistance(AngleAtTarget, DistanceToWall, Voltage_to_Feet(Constants.FRONT_TO_BIG_ELLIPSE_ENCODER));
-
-							TankLeft(MotionCalculation.normalize(-90, 0, Robot.e_navx.getPitch(), 5));
-							TankRight(MotionCalculation.normalize(-90, 0, Robot.e_navx.getPitch(), 5));
-							if (MotionCalculation.isFinished()) {
-								TankLeft(MotionCalculation.normalize(SDistance, 0, getEncodervalues(), 1));
-								TankRight(MotionCalculation.normalize(LDistance, 0, getEncodervalues(), 1));
-								if (MotionCalculation.isFinished()) {
-									Robot.i_auto.INUSE = false;
-								}
-							}
+//							double DistanceToWall = Voltage_to_Feet((leftIRSensor.getVoltage() + rightIRSensor.getVoltage()) / 2);
+//
+//							double SDistance = ellipticalDriveDistance(AngleAtTarget, DistanceToWall, Voltage_to_Feet(Constants.FRONT_TO_SMALL_ELLIPSE_ENCODER));
+//							double LDistance = ellipticalDriveDistance(AngleAtTarget, DistanceToWall, Voltage_to_Feet(Constants.FRONT_TO_BIG_ELLIPSE_ENCODER));
+//
+//							TankLeft(MotionCalculation.normalize(-90, 0, Robot.e_navx.getPitch(), 5));
+//							TankRight(MotionCalculation.normalize(-90, 0, Robot.e_navx.getPitch(), 5));
+//							if (MotionCalculation.isFinished()) {
+//								TankLeft(MotionCalculation.normalize(SDistance, 0, getEncodervalues(), 1));
+//								TankRight(MotionCalculation.normalize(LDistance, 0, getEncodervalues(), 1));
+//								if (MotionCalculation.isFinished()) {
+//									Robot.i_auto.INUSE = false;
+//								}
+//							}
 						}
 						break;
 				}

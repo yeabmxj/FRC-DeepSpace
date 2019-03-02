@@ -8,10 +8,10 @@ import frc.robot.Robot;
 
 public class m_Climber {
 
-    public VictorSPX climbUp;
-    public VictorSPX climbForward;
+    private VictorSPX climbUp;
+    private VictorSPX climbForward;
 
-    double[] Rise_and_Run;
+    private double[] Rise_and_Run;
 
     public m_Climber() {
         climbUp = new VictorSPX(Constants.UP_CLIMBER_VICTOR_ID);

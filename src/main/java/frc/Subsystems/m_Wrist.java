@@ -3,6 +3,7 @@ package frc.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import frc.Base.Constants;
 import frc.robot.Robot;
 
@@ -13,7 +14,7 @@ public class m_Wrist {
     private DigitalInput leftXLimit;
     private DigitalInput rightXLimit;
 
-    private static double[] Speeds;
+    static double[] Speeds;
     private static int XDirection;
     private static int YDirection;
     private static int flip;
@@ -57,6 +58,7 @@ public class m_Wrist {
     public void update() {
         switch (Robot.i_wrist.getFSMState()) {
             case "MOVING":
+                updateSpeed();
                 SetTranslation(
                     (!GetPressed("Left") || !GetPressed("Right") ? 1 : 0) * XDirection * Speeds[0],
                     YDirection * Speeds[1]

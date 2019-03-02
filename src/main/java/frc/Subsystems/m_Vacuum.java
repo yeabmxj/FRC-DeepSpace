@@ -9,15 +9,16 @@ import frc.robot.Robot;
 
 public class m_Vacuum {
 	private Spark pump;
-	//private Relay solenoidControl;
+	private Relay solenoidControl;
+
 	private double pressCount = 0;
 
 	public m_Vacuum() {
 		pump = new Spark(Constants.VACUUM_SPARK_ID);
-		//solenoidControl = new Relay(Constants.SOLENOID_CONTROL_RELAY_ID, Relay.Direction.kBoth);
+		solenoidControl = new Relay(Constants.SOLENOID_CONTROL_RELAY_ID, Relay.Direction.kBoth);
 	}
 
-	private void setSuccageSpeed(double succspeed) {
+	private void setSuctionSpeed(double succspeed) {
 		pump.set(succspeed);
 	}
 	private void setPressCount() {
@@ -25,23 +26,23 @@ public class m_Vacuum {
 			Controls.getButton(Controls.solenoidButton) && pressCount == 0 ? 1:
 			Controls.getButton(Controls.solenoidButton) && pressCount == 1 ? 0: 1;
 	}
-//	private void setSolenoidExtension() {
-//		setPressCount();
-//		solenoidControl.set(
-//				pressCount == 0 ? Relay.Value.kForward:
-//				pressCount == 1 ? Relay.Value.kReverse:
-//				Relay.Value.kOff);
-//	}
+	private void setSolenoidExtension() {
+		setPressCount();
+		solenoidControl.set(
+				pressCount == 0 ? Relay.Value.kForward:
+				pressCount == 1 ? Relay.Value.kReverse:
+				Relay.Value.kOff);
+	}
 
 	public void update() {
 		switch (Robot.i_vacuum.getFSMState()) {
 			case "SUCTION ON":
-				setSuccageSpeed(Constants.SPARK_SUCTION_SPEED);
-//				setSolenoidExtension();
+				setSuctionSpeed(Constants.SPARK_SUCTION_SPEED);
+				setSolenoidExtension();
 				break;
 			case "SUCTION OFF":
-				setSuccageSpeed(0);
-//				setSolenoidExtension();
+				setSuctionSpeed(0);
+				setSolenoidExtension();
 				break;
 		}
 	}

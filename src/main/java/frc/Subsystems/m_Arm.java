@@ -21,15 +21,15 @@ public class m_Arm extends Input {
     }
     public void setSpeed(double speed) { DART.set(ControlMode.PercentOutput, speed);}
     public void setTarget() {
-        ArmTarget += Robot.i_arm.getMessage().equals("LEVEL UP") ? 1 :
-                Robot.i_arm.getMessage().equals("LEVEL DOWN") ? -1 : 0;
+        ArmTarget += ArmTarget > 3 ? -1 :
+                ArmTarget < 0 ? 1 :
+                        Robot.i_arm.getMessage().equals("LEVEL UP") ? 1 :
+                                Robot.i_arm.getMessage().equals("LEVEL DOWN") ? -1 : 0;
         target =
                 ArmTarget == 0 ? Constants.HOME_HEIGHT:
-                ArmTarget == 1 ? Constants.LEVEL_1_HEIGHT:
-                ArmTarget == 2 ? Constants.LEVEL_2_HEIGHT:
-                ArmTarget == 3 ? Constants.LEVEL_3_HEIGHT:
-                ArmTarget > 4 ? Constants.LEVEL_3_HEIGHT :
-                ArmTarget < 0 ? Constants.HOME_HEIGHT : Robot.e_navx.getRoll();
+                        ArmTarget == 1 ? Constants.LEVEL_1_HEIGHT:
+                                ArmTarget == 2 ? Constants.LEVEL_2_HEIGHT:
+                                        ArmTarget == 3 ? Constants.LEVEL_3_HEIGHT: Robot.e_navx.getRoll();
     }
     public void update() {
         switch (Robot.i_arm.getFSMState()) {
@@ -44,8 +44,8 @@ public class m_Arm extends Input {
             case "MANUAL":
                 Robot.i_arm.INUSE = true;
                 setSpeed(
-                        Robot.i_arm.getMessage().equals("Level Up") ? .5 :
-                        Robot.i_arm.getMessage().equals("Level Down") ? -.5 : 0);
+                        Robot.i_arm.getMessage().equals("LEVEL UP") ? .5 :
+                                Robot.i_arm.getMessage().equals("LEVEL DOWN") ? -.5 : 0);
                 Robot.i_arm.INUSE = false;
                 break;
             case "STOPPED":

@@ -50,10 +50,10 @@ public class Robot extends TimedRobot {
         i_wrist = new i_Wrist();
 
         Controls.updatePorts();
+        Operator.update();
         b_drivetrain.setDriveTrainType("Tank");
         m_drivetrain.resetEncoders();
         e_navx.resetGyro();
-        Operator.update();
     }
     public void robotPeriodic() {
         Operator.update();
@@ -80,9 +80,18 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         //i_drivetrain.update();
     }
-    public void testInit() {
+    public void testPeriodic() {
+        System.out.println(Controls.mainJoystick.getRawButton(3) ? "yes" : "no");
+        System.out.println(Controls.secondaryJoystick.getRawButton(4) ? "yes" : "no");
         i_arm.update();
-        i_wrist.update();
-        i_vacuum.update();
+//        i_wrist.update();
+//        i_vacuum.update();
+
+//        m_drivetrain.TankDrive(0, e_limeLightVision.getX(), .4);
+//        m_drivetrain.TankLeft(m_auto.ellipticalDriveDistance(e_limeLightVision.getX(), m_auto.computeDistance(1.5, 3, e_limeLightVision.getY()), 1));
+//        m_drivetrain.TankRight(m_auto.ellipticalDriveDistance(e_limeLightVision.getX(), m_auto.computeDistance(1.5, 3, e_limeLightVision.getY()) + 1.5, 1));
+//        m_auto.startLine(4);
+//        m_auto.startTurn(90);
+//        m_auto.startLine(2);
     }
 }
