@@ -21,7 +21,8 @@ public class MotionCalculation {
         if (getSystem().equals("Arm")) {
             normalizedValue = ((target - offset) - (reading)) / ((target - offset) - reading);
         }
-        else if (getSystem().equals("Auto")) {normalizedValue = ((target - offset) - (reading)) / (target - offset);}
+        else if (getSystem().equals("Auto")) {
+            normalizedValue = ((target - offset) - (reading)) / (target - offset);}
         finished = Math.abs(error) < tolerance;
         System.out.println(error);
         return normalizedValue;

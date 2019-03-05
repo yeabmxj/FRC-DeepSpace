@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.robot.Robot;
 
 public class e_LimeLightVision {
     public NetworkTableEntry tx;
@@ -14,6 +15,9 @@ public class e_LimeLightVision {
     double x = 0;
     double y = 0;
     double area = 0;
+
+    double targetHeight;
+    double camHeight;
     
     public e_LimeLightVision() {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -45,4 +49,5 @@ public class e_LimeLightVision {
     public double getTarget() {
         return tv.getDouble(0);
     }
+    public double getDistance() { return Math.abs((targetHeight - camHeight) / getY());}
 }
