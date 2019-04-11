@@ -26,10 +26,10 @@ public class m_Drivetrain {
         //leftIRSensor = new AnalogInput(Constants.LEFT_IR_SENSOR_ID);
         //rightIRSensor = new AnalogInput(Constants.RIGHT_IR_SENSOR_ID);
 
-        frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-        backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        frontleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
+        frontrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
+        backleftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
+        backrightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
 
     }
     public void MecanumDrive(double yaxis, double xaxis, double zaxis, double gyroangle, double throttle) {

@@ -16,8 +16,9 @@ public class e_LimeLightVision {
     double y = 0;
     double area = 0;
 
-    double targetHeight;
-    double camHeight;
+    double targetHeight = 2.66;
+    double camHeight = .625;
+    double theta = 24;
     
     public e_LimeLightVision() {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -49,5 +50,11 @@ public class e_LimeLightVision {
     public double getTarget() {
         return tv.getDouble(0);
     }
-    public double getDistance() { return Math.abs((targetHeight - camHeight) / getY());}
+    public double getDistance() { return Math.abs((targetHeight - camHeight) / Math.tan(Math.toRadians(Math.abs(getY()) + theta) + .5));}
+    public double testGetDistance() { return (Math.sin(90 - Math.abs(getY()) * (targetHeight - camHeight))) / Math.sin(Math.abs(getY()));}
+//    public double[] parabolaValues() {
+//        double currentAngle = Math.abs(getX());
+//        double oppositeAngle = 90 - Math.abs(getX());
+//        double vToWall =
+//    }
 }

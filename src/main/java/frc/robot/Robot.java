@@ -1,11 +1,17 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import frc.auto.*;
 import frc.Base.*;
 import frc.External.*;
 import frc.StateMachines.*;
 import frc.Subsystems.*;
+
+import java.util.function.IntToDoubleFunction;
 
 public class Robot extends TimedRobot {
     public static UDPClient message;
@@ -14,6 +20,8 @@ public class Robot extends TimedRobot {
     public static e_LimeLightVision e_limeLightVision;
 
     public static b_Drivetrain b_drivetrain;
+
+    public static TalonSRX oof;
 
     public static m_Drivetrain m_drivetrain;
     public static m_Auto m_auto;
@@ -31,7 +39,17 @@ public class Robot extends TimedRobot {
     public static i_Vacuum i_vacuum;
     public static i_Wrist i_wrist;
 
+    double count = 2;
+    String heldItem;
+    double distance;
+
+    TalonSRX test;
+
     public void robotInit() {
+
+        test = new TalonSRX(4);
+        test.setSelectedSensorPosition(0,0,0);
+
         message = new UDPClient("10.51.15.2", 8005);
 
         e_navx = new e_Navx();
@@ -58,50 +76,52 @@ public class Robot extends TimedRobot {
         Controls.updatePorts();
         Operator.update();
         b_drivetrain.setDriveTrainType("Tank");
-        m_drivetrain.resetEncoders();
         e_navx.resetGyro();
     }
     public void robotPeriodic() {
         Operator.update();
     }
     public void autonomousInit() {
-        Robot.m_drivetrain.resetEncoders(); }
+        e_limeLightVision.setCameraControls("ledMode", 3);
+        e_limeLightVision.setCameraControls("camMode", 0);
+        e_navx.resetGyro();
+        distance = Math.abs(e_limeLightVision.getDistance());
+    }
     public void autonomousPeriodic() {
-        //i_auto.update();
+        count +=
+                Controls.getButton(14) && count + 1 != 5 ? 1 :
+                count == 4 ? -2: 0;
+        heldItem =
+                count == 2 ? "None":
+                count == 3 ? "Hatch":
+                count == 4 ? "Ball": "Calc Bad";
+        System.out.println(heldItem + " " + count);
+//        i_angleCorrection.update();
         MotionCalculation.setSystem("Auto");
-        if (!MotionCalculation.isFinished()) {
-            System.out.println(MotionCalculation.getError() + "  " + Robot.m_drivetrain.getEncodervalues());
-            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(),1)));
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(10,1, Robot.m_drivetrain.getEncodervalues(),1)));
+        System.out.println(distance);
+        System.out.println(m_drivetrain.getEncodervalues());
+        if (Controls.getButton(Controls.autonomousButton)) {
+            m_drivetrain.TankDrive(
+                MotionCalculation.normalize(0, 0, e_limeLightVision.getX(), 5) / 3,
+                MotionCalculation.normalize(4, 0, m_drivetrain.getEncodervalues(), 1),
+                .5);
         }
         else {
-            Robot.m_drivetrain.TankLeft((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
-            Robot.m_drivetrain.TankRight((MotionCalculation.normalize(90,5, Robot.e_navx.getYaw(), 1)));
+            System.out.println("fuck");
+            m_drivetrain.TankDrive(0,0,0);
         }
     }
+
     public void teleopInit() {
         e_navx.resetGyro();
         m_drivetrain.resetEncoders();
     }
     public void teleopPeriodic() {
-        //i_drivetrain.update();
-    }
-    public void testPeriodic() {
-        System.out.println(Controls.mainJoystick.getRawButton(3) ? "yes" : "no");
-        System.out.println(Controls.secondaryJoystick.getRawButton(4) ? "yes" : "no");
-        i_arm.update();
-        i_climber.update();
         i_drivetrain.update();
-        i_vacuum.update();
-        i_wrist.update();
-//        i_wrist.update();
-//        i_vacuum.update();
+    }
 
-//        m_drivetrain.TankDrive(0, e_limeLightVision.getX(), .4);
-//        m_drivetrain.TankLeft(m_auto.ellipticalDriveDistance(e_limeLightVision.getX(), m_auto.computeDistance(1.5, 3, e_limeLightVision.getY()), 1));
-//        m_drivetrain.TankRight(m_auto.ellipticalDriveDistance(e_limeLightVision.getX(), m_auto.computeDistance(1.5, 3, e_limeLightVision.getY()) + 1.5, 1));
-//        m_auto.startLine(4);
-//        m_auto.startTurn(90);
-//        m_auto.startLine(2);
+    public void testPeriodic() {
+        test.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+        System.out.println((test.getSelectedSensorPosition(0) / 1440 * 6 * Math.PI / 12));
     }
 }

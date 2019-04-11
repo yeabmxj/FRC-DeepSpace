@@ -10,26 +10,34 @@ public class m_AngleCorrection extends m_Drivetrain {
 
 	String Target() {
 		return
-				Robot.e_navx.getYaw() < 46 && Robot.e_navx.getYaw() > 44 ? "Hatch Left":
-				Robot.e_navx.getYaw() < -44 && Robot.e_navx.getYaw() > -46 ? "Hatch Right":
-				Robot.e_navx.getYaw() < 92 && Robot.e_navx.getYaw() > 88 ? "Ball Rocket":
-				Robot.e_navx.getYaw() < -88 && Robot.e_navx.getYaw() > -92 ? "Ball Cargo" : "Target Not Found";
+				Robot.e_navx.getYaw() < 50 && Robot.e_navx.getYaw() > 40 ? "Hatch Left":
+				Robot.e_navx.getYaw() < -40 && Robot.e_navx.getYaw() > -50 ? "Hatch Right":
+				Robot.e_navx.getYaw() < 95 && Robot.e_navx.getYaw() > 85 ? "Ball Rocket":
+				Robot.e_navx.getYaw() < -85 && Robot.e_navx.getYaw() > -95 ? "Ball Cargo" : "Target Not Found";
 	}
 
 	public void update() {
 		switch (Robot.i_angleCorrection.getFSMState()) {
 			case "Alignment":
 				Robot.i_angleCorrection.INUSE = true;
-				MotionCalculation.normalize(0,5, Robot.e_limeLightVision.getX(),5);
+				MotionCalculation.setSystem("Auto");
+				TankLeft(.5 * Math.abs(.5 + MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1)));
+				TankRight(.5 * Math.abs(.5 - MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1)));
+
 				Alignment = MotionCalculation.isFinished();
 				Robot.i_angleCorrection.INUSE = false;
 				break;
 			case "Recognize and Run to Target":
 				Robot.i_angleCorrection.INUSE = true;
-				MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1);
+				MotionCalculation.setSystem("Auto");
+				TankLeft(.5 + .5 * MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1));
+				TankRight(.5 - .5 * MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1));
 				Robot.i_angleCorrection.INUSE = false;
 				break;
-			case "":
+			case "Nope":
+				System.out.println("Button not pressed");
+//				TankLeft(Math.abs(MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1)));
+//				TankRight(Math.abs(MotionCalculation.normalize(1.5,1, Robot.e_limeLightVision.getDistance(),1)));
 				break;
 		}
 	}
